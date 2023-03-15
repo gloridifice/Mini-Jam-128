@@ -78,3 +78,6 @@ Assets/Scenes/TestLevel.unity
 Assets/Scenes/TestLevel.unity.meta
 Assets/Scenes/MainMeun.unity
 Assets/Scenes/MainMeun.unity.meta
+
+ShaderGraphSettings.asset
+URP-HighFidelity-Renderer.asset
