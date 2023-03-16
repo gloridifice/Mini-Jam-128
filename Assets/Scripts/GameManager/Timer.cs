@@ -14,5 +14,6 @@ public class Timer : MonoBehaviour
     private void FixedUpdate()
     {
         _time += Time.fixedDeltaTime;
+        // Debug.Log("time: " + Tick);
     }
 }
