@@ -18,10 +18,11 @@ public enum PersonStatus
 /// </summary>
 public class TrappedPerson : MonoBehaviour
 {
-    public uint timeToDie;
+    public float time;
     
     public Age age;
-    public int Heartbeat => GetHeartbeat(timeToDie);
+    //public int hb;
+    public int Heartbeat => GetHeartbeat(time - _timer.Tick);
     public int RespiratoryRate => GetRespiratoryRate(Heartbeat);
 
     public TriageTag triageTag = TriageTags.None;
@@ -132,15 +133,19 @@ public class TrappedPerson : MonoBehaviour
     private void Update()
     {
         CheckPoints();
+
+        //hb = Heartbeat;
     }
 
     // todo: figure out how do deal with subtitle, heartbeat and health facts
     // todo: how do a person get saved
 
     // todo: add more model
-    private int GetHeartbeat(uint time)
+    // todo: people will die
+    private int GetHeartbeat(float time)
     {
         var exactBPM = GetBPM(time);
+        Debug.Log(exactBPM);
         return exactBPM switch
         {
             (>= 0) and (< 45) => 0,
@@ -151,7 +156,7 @@ public class TrappedPerson : MonoBehaviour
         };
     }
 
-    private uint GetBPM(uint t)
+    private uint GetBPM(float t)
     {
         return t switch
         {
