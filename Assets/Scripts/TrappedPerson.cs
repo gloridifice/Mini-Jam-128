@@ -17,7 +17,9 @@ public enum PersonStatus
 public class TrappedPerson : MonoBehaviour
 {
     public float health;
+    public Age age;
     // todo: fill in other basic info of person
+    
     public TriageTag triageTag = TriageTags.None;
     public PersonStatus status;
 
