@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,6 +134,8 @@ GameObject:
   - component: {fileID: 712986675}
   - component: {fileID: 712986674}
   - component: {fileID: 712986676}
+  - component: {fileID: 712986679}
+  - component: {fileID: 712986678}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -154,8 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trappedPersons:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 937466990}
+  - {fileID: 937466990}
 --- !u!4 &712986675
 Transform:
   m_ObjectHideFlags: 0
@@ -181,6 +183,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dfcaf16132aef048813638725e3be64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &712986678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712986673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b24fd23e3c50f45a67527be7dbdbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &712986679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712986673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4128d3c18478a4da1dd39b6a3bf54e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &937466990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 834082762424337001, guid: 7e5613cfdb3b80047bf1acb158c30ac8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1678553252437384359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1531099050
