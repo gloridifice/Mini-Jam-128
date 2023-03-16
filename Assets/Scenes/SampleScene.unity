@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 712986676}
   - component: {fileID: 712986679}
   - component: {fileID: 712986678}
+  - component: {fileID: 712986680}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -209,6 +210,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4128d3c18478a4da1dd39b6a3bf54e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &712986680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712986673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f715c4926bf7ac1409235321e49b543d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  person: {fileID: 937466990}
 --- !u!114 &937466990 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 834082762424337001, guid: 7e5613cfdb3b80047bf1acb158c30ac8,
@@ -427,6 +441,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 834082762424337001, guid: 7e5613cfdb3b80047bf1acb158c30ac8,
+        type: 3}
+      propertyPath: timeToGetVoice
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 834082762424337001, guid: 7e5613cfdb3b80047bf1acb158c30ac8,
+        type: 3}
+      propertyPath: timeToGetFullInfo
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 834082762424337001, guid: 7e5613cfdb3b80047bf1acb158c30ac8,
+        type: 3}
+      propertyPath: timeToGetHeartbeat
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5239500048498848048, guid: 7e5613cfdb3b80047bf1acb158c30ac8,
         type: 3}
       propertyPath: m_Name
