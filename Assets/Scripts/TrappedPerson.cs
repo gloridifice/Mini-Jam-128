@@ -33,7 +33,10 @@ public class TrappedPerson : MonoBehaviour
         private float _currentTime;
         [SerializeField] private float timeToGetVoice;
         [SerializeField] private float timeToGetHeartbeat;
-        [SerializeField] private float timeToGetFullInfo; 
+        [SerializeField] private float timeToGetFullInfo;
+        private event EventHandler ShowVoice;
+        private event EventHandler ShowHeartbeat;
+        private event EventHandler ShowFullInfo;
         
         private float TimeAccumulation()
         {
@@ -52,17 +55,17 @@ public class TrappedPerson : MonoBehaviour
                 _currentTime = _accumulatedTime + TimeAccumulation();
                 if (_currentTime > timeToGetVoice)
                 {
-                    ShowVoice();
+                    ShowVoice?.Invoke(this, EventArgs.Empty);
                 }
 
                 if (_currentTime > timeToGetHeartbeat)
                 {
-                    ShowHeartbeat();
+                    ShowHeartbeat?.Invoke(this, EventArgs.Empty);
                 }
 
                 if (_currentTime > timeToGetFullInfo)
                 {
-                    ShowFullInfo();
+                    ShowFullInfo?.Invoke(this, EventArgs.Empty);
                 }
             }
             else
@@ -86,22 +89,25 @@ public class TrappedPerson : MonoBehaviour
             }
         }
 
-        private void ShowVoice()
+        private void EShowVoice(System.Object sender, EventArgs args)
         {
             // TODO: impl needed;
-            Debug.Log("voice");
+            //Debug.Log("voice");
+            ShowVoice -= EShowVoice;
         }
 
-        private void ShowHeartbeat()
+        private void EShowHeartbeat(System.Object sender, EventArgs args)
         {
             // TODO: impl needed;
-            Debug.Log("heartbeat");
+            //Debug.Log("heartbeat");
+            ShowHeartbeat -= EShowHeartbeat;
         }
 
-        private void ShowFullInfo()
+        private void EShowFullInfo(System.Object sender, EventArgs args)
         {
             // TODO: impl needed;
-            Debug.Log("fullInfo");
+            //Debug.Log("fullInfo");
+            ShowFullInfo -= EShowFullInfo;
         }
         
     #endregion
@@ -114,6 +120,9 @@ public class TrappedPerson : MonoBehaviour
     private void Start()
     {
         GetStartTime();
+        ShowVoice += EShowVoice;
+        ShowHeartbeat += EShowHeartbeat;
+        ShowFullInfo += EShowFullInfo;
     }
 
     private void Update()
