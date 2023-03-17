@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private Counter _counter;
 
     private Timer _timer;
+    private Rescue _rescue;
 
     private void Start()
     {
