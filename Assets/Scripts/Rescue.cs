@@ -39,7 +39,7 @@ public class Rescue
         return bottom; 
     }
 
-    private void PushFront(TrappedPerson person)// it should be forced
+    private void PushFront(TrappedPerson person)
     {
         rescuing.Insert(0, (person, table[person]));
         if (rescuing.Count > RescuingLimit)
@@ -62,6 +62,7 @@ public class Rescue
         var bottom = rescuing[^1];
         rescuing.Remove(bottom);
         Insert(bottom.Item1, bottom.Item2);
+        bottom.Item1.BreakRescue();
     }
     
     public void Insert(TrappedPerson person, Priority priority)
