@@ -34,6 +34,13 @@ namespace GameManager
                     counter.AddDiedPerson(person);
                     // Debug.Log("person " + person.name + " died");
                 }
+
+                if (person.rescueTime >= TrappedPerson.TimeToRescue)
+                {
+                    person.status = PersonStatus.Saved;
+                    counter.AddSavedPerson(person);
+                    //Debug.Log("person " + person.name + " saved");
+                }
             }
         }
     }

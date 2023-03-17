@@ -123,6 +123,36 @@ public class TrappedPerson : MonoBehaviour
         
     #endregion
 
+
+    #region GetRescue
+
+    public const int TimeToRescue = 10;// TODO: decide this variable
+    [HideInInspector]public int rescueTime;
+    private int rescueTimeStart;
+    private bool isGettingRescue;
+    
+    public void StartRescue()
+    {
+        isGettingRescue = true;
+        rescueTimeStart = timer.IntTick;
+    }
+
+    public void BreakRescue()
+    {
+        isGettingRescue = false;
+        rescueTime = 0;
+    }
+
+    public void GetRescue()
+    {
+        if (isGettingRescue)
+        {
+            rescueTime = timer.IntTick - rescueTimeStart;
+        }
+    }
+    
+    #endregion
+    
     private void Awake()
     {
         timer = GameObject.Find("GameManager").GetComponent<Timer>();
@@ -139,6 +169,7 @@ public class TrappedPerson : MonoBehaviour
     private void Update()
     {
         CheckPoints();
+        GetRescue();
 
         //hb = Heartbeat;
     }
