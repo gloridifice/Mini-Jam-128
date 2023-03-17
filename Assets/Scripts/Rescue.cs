@@ -120,7 +120,7 @@ public class Rescue
                 mid.Add(person);
                 break;
             case Priority.Low:
-                mid.Add(person);
+                low.Add(person);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(priority), priority, null);
