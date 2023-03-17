@@ -7,8 +7,8 @@ namespace GameManager
     public class LevelManager : MonoBehaviour
     {
         public List<TrappedPerson> trappedPersons;
+        
         private Counter counter;
-
         private Timer timer;
         private Rescue rescue;
 
@@ -51,13 +51,9 @@ namespace GameManager
             
         }
 
-        public void AddRescue(TrappedPerson tar, Rescue.Priority priority)
+        public void AddRescue(TrappedPerson person, Rescue.Priority priority)
         {
-            switch (priority)
-            {
-                case Rescue.Priority.High:
-                    break;
-            }
+            rescue.Insert(person, priority);
         }
     }
 }
