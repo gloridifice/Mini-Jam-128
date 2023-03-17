@@ -12,6 +12,10 @@ public enum PersonStatus
     Died,
 }
 
+/// <summary>
+/// Indicates the stage of heartbeat and respiratory rate.
+/// <para>Zero means the person is dead.</para>
+/// </summary>
 public enum MeasureStage
 {
     Lowest,
@@ -24,11 +28,10 @@ public enum MeasureStage
 
 /// <summary>
 /// <para>Class of trapped person.</para>
-/// <para>Data only.</para>
 /// </summary>
 public class TrappedPerson : MonoBehaviour
 {
-    [FormerlySerializedAs("leftTime")] public float time;
+    public float time;
     
     public Age age;
     public MeasureStage Heartbeat => GetHeartbeat(time - _timer.Tick);
@@ -145,12 +148,10 @@ public class TrappedPerson : MonoBehaviour
 
         //hb = Heartbeat;
     }
-
-    // todo: figure out how do deal with subtitle, heartbeat and health facts
+    
     // todo: how do a person get saved
 
     // todo: add more model
-    // todo: people will die
     private MeasureStage GetHeartbeat(float leftTime)
     {
         var exactBPM = GetBPM(leftTime);
