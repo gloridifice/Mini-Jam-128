@@ -13,17 +13,29 @@ public enum PersonStatus
 }
 
 /// <summary>
+/// Indicates the stage of heartbeat and respiratory rate.
+/// <para>Zero means the person is dead.</para>
+/// </summary>
+public enum MeasureStage
+{
+    Lowest,
+    Low,
+    Normal,
+    High,
+    Highest,
+    Zero,
+}
+
+/// <summary>
 /// <para>Class of trapped person.</para>
-/// <para>Data only.</para>
 /// </summary>
 public class TrappedPerson : MonoBehaviour
 {
     public float time;
     
     public Age age;
-    //public int hb;
-    public int Heartbeat => GetHeartbeat(time - _timer.Tick);
-    public int RespiratoryRate => GetRespiratoryRate(Heartbeat);
+    public MeasureStage Heartbeat => GetHeartbeat(time - _timer.Tick);
+    public MeasureStage RespiratoryRate => Heartbeat;
 
     public TriageTag triageTag = TriageTags.None;
     public PersonStatus status;
@@ -128,23 +140,22 @@ public class TrappedPerson : MonoBehaviour
 
         //hb = Heartbeat;
     }
-
-    // todo: figure out how do deal with subtitle, heartbeat and health facts
+    
     // todo: how do a person get saved
 
     // todo: add more model
-    // todo: people will die
-    private int GetHeartbeat(float time)
+    private MeasureStage GetHeartbeat(float leftTime)
     {
-        var exactBPM = GetBPM(time);
+        var exactBPM = GetBPM(leftTime);
         Debug.Log(exactBPM);
         return exactBPM switch
         {
-            (>= 0) and (< 45) => 0,
-            (>= 45) and (< 60) => 1,
-            (>= 60) and (< 100) => 2,
-            (>= 100) and (< 120) => 3,
-            (>= 120) => 4,
+            0 => MeasureStage.Zero,
+            (> 0) and (< 45) => MeasureStage.Lowest,
+            (>= 45) and (< 60) => MeasureStage.Low,
+            (>= 60) and (< 100) => MeasureStage.Normal,
+            (>= 100) and (< 120) => MeasureStage.High,
+            (>= 120) => MeasureStage.Highest,
         };
     }
 
@@ -156,12 +167,7 @@ public class TrappedPerson : MonoBehaviour
             (>= 40) and (< 120) => (uint)Random.Range(120, 140),
             (>= 120) and (< 220) => (uint)Random.Range(100, 120),
             (>= 220) and (< 300) => (uint)Random.Range(60, 80),
-            _ => throw new OverflowException("Impossible time"),
+            _ => 0,
         };
-    }
-
-    private int GetRespiratoryRate(int hb)
-    {
-        return hb;
     }
 }

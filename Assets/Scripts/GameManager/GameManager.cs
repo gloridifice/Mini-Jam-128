@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Counter), typeof(Ending))]
 public class GameManager : MonoBehaviour
 {
-    public TrappedPerson[] trappedPersons;
+    public List<TrappedPerson> trappedPersons;
     private Counter _counter;
 
     private Timer _timer;
