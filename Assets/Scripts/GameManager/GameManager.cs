@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var person in trappedPersons)
         {
-            if (person.status == PersonStatus.Died) continue;
+            if (person.status is PersonStatus.Died or PersonStatus.Saved) continue;
             if (person.time < _timer.Tick)
             {
                 person.status = PersonStatus.Died;
