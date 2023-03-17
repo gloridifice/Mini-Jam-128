@@ -33,24 +33,24 @@ public class TrappedPerson : MonoBehaviour
     #region InfoGetting
         
         private bool _isGettingInfo;// TODO: impl change between true and false
-        private float _startTime;
-        private float _accumulatedTime;
-        private float _currentTime;
-        [SerializeField] private float timeToGetVoice;
-        [SerializeField] private float timeToGetHeartbeat;
-        [SerializeField] private float timeToGetFullInfo;
+        private int _startTime;
+        private int _accumulatedTime;
+        private int _currentTime;
+        private const int TimeToGetVoice = 3;
+        private const int TimeToGetHeartbeat = 6;
+        private const int TimeToGetFullInfo = 9;
         private event EventHandler ShowVoice;
         private event EventHandler ShowHeartbeat;
         private event EventHandler ShowFullInfo;
         
-        private float TimeAccumulation()
+        private int TimeAccumulation()
         {
-            return _timer.Tick - _startTime;
+            return _timer.IntTick - _startTime;
         }
 
         private void GetStartTime()
         {
-            _startTime = _timer.Tick;
+            _startTime = _timer.IntTick;
         }
 
         private void CheckPoints()
@@ -58,38 +58,30 @@ public class TrappedPerson : MonoBehaviour
             if (_isGettingInfo)
             {
                 _currentTime = _accumulatedTime + TimeAccumulation();
-                if (_currentTime > timeToGetVoice)
+                if (_currentTime > TimeToGetVoice)
                 {
                     ShowVoice?.Invoke(this, EventArgs.Empty);
                 }
 
-                if (_currentTime > timeToGetHeartbeat)
+                if (_currentTime > TimeToGetHeartbeat)
                 {
                     ShowHeartbeat?.Invoke(this, EventArgs.Empty);
                 }
 
-                if (_currentTime > timeToGetFullInfo)
+                if (_currentTime > TimeToGetFullInfo)
                 {
                     ShowFullInfo?.Invoke(this, EventArgs.Empty);
                 }
             }
             else
             {
-                if (_currentTime < timeToGetFullInfo)
+                _accumulatedTime = _currentTime switch
                 {
-                    if (_currentTime >= timeToGetHeartbeat)
-                    {
-                        _accumulatedTime = timeToGetHeartbeat;
-                    }
-                    else if (_currentTime >= timeToGetVoice)
-                    {
-                        _accumulatedTime = timeToGetVoice;
-                    }
-                    else
-                    {
-                        _accumulatedTime = 0f;
-                    }
-                }
+                    (< TimeToGetVoice) => 0,
+                    (>= TimeToGetVoice) and (< TimeToGetHeartbeat) => TimeToGetVoice,
+                    (>= TimeToGetHeartbeat) and (< TimeToGetFullInfo) => TimeToGetHeartbeat,
+                    (>= TimeToGetFullInfo) => TimeToGetFullInfo,
+                };
                 GetStartTime();
             }
         }
@@ -98,21 +90,21 @@ public class TrappedPerson : MonoBehaviour
         {
             // TODO: impl needed;
             //Debug.Log("voice");
-            ShowVoice -= EShowVoice;
+            ShowVoice -= EShowVoice;// remove this if u want to call every frame
         }
 
         private void EShowHeartbeat(System.Object sender, EventArgs args)
         {
             // TODO: impl needed;
             //Debug.Log("heartbeat");
-            ShowHeartbeat -= EShowHeartbeat;
+            ShowHeartbeat -= EShowHeartbeat;// remove this if u want to call every frame
         }
 
         private void EShowFullInfo(System.Object sender, EventArgs args)
         {
             // TODO: impl needed;
             //Debug.Log("fullInfo");
-            ShowFullInfo -= EShowFullInfo;
+            ShowFullInfo -= EShowFullInfo;// remove this if u want to call every frame
         }
         
     #endregion
