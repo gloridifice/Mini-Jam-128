@@ -46,10 +46,10 @@ public class TrappedPerson : MonoBehaviour
 
     #region InfoGetting
         
-        private bool _isGettingInfo;// TODO: impl change between true and false
-        private int _startTime;
-        private int _accumulatedTime;
-        private int _currentTime;
+        private bool isGettingInfo;// TODO: impl change between true and false
+        private int startTime;
+        private int accumulatedTime;
+        private int currentTime;
         private const int TimeToGetVoice = 3;
         private const int TimeToGetHeartbeat = 6;
         private const int TimeToGetFullInfo = 9;
@@ -59,37 +59,37 @@ public class TrappedPerson : MonoBehaviour
         
         private int TimeAccumulation()
         {
-            return timer.IntTick - _startTime;
+            return timer.IntTick - startTime;
         }
 
         private void GetStartTime()
         {
-            _startTime = timer.IntTick;
+            startTime = timer.IntTick;
         }
 
         private void CheckPoints()
         {
-            if (_isGettingInfo)
+            if (isGettingInfo)
             {
-                _currentTime = _accumulatedTime + TimeAccumulation();
-                if (_currentTime > TimeToGetVoice)
+                currentTime = accumulatedTime + TimeAccumulation();
+                if (currentTime > TimeToGetVoice)
                 {
                     ShowVoice?.Invoke(this, EventArgs.Empty);
                 }
 
-                if (_currentTime > TimeToGetHeartbeat)
+                if (currentTime > TimeToGetHeartbeat)
                 {
                     ShowHeartbeat?.Invoke(this, EventArgs.Empty);
                 }
 
-                if (_currentTime > TimeToGetFullInfo)
+                if (currentTime > TimeToGetFullInfo)
                 {
                     ShowFullInfo?.Invoke(this, EventArgs.Empty);
                 }
             }
             else
             {
-                _accumulatedTime = _currentTime switch
+                accumulatedTime = currentTime switch
                 {
                     (< TimeToGetVoice) => 0,
                     (>= TimeToGetVoice) and (< TimeToGetHeartbeat) => TimeToGetVoice,
