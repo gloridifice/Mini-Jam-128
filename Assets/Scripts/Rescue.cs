@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// [Serializable]
+[Serializable]
 public class Rescue
 {
     private List<TrappedPerson> high;
     private List<TrappedPerson> mid;
     private List<TrappedPerson> low;
+    public List<(TrappedPerson, Priority)> rescuing;
+    private const int RescuingLimit = 2;
     private Dictionary<TrappedPerson, Priority> table;
 
     public int Count => high.Count + mid.Count + low.Count;
     public int HighCount => high.Count;
-    
-    // todo: how to deal with the breaking change of high?
 
     public enum Priority
     {
@@ -21,11 +21,69 @@ public class Rescue
         Low,
     }
 
+    public Rescue()
+    {
+        high = new List<TrappedPerson>();
+        mid = new List<TrappedPerson>();
+        low = new List<TrappedPerson>();
+        rescuing = new List<(TrappedPerson, Priority)>();
+        table = new Dictionary<TrappedPerson, Priority>();
+    }
+    
+    public TrappedPerson PushBack()
+    {
+        if (rescuing.Count >= RescuingLimit) return null;
+        var bottom = Pop();
+        if (bottom == null) return bottom;
+        rescuing.Add((bottom, table[bottom]));
+        return bottom; 
+    }
+
+    private void PushFront(TrappedPerson person)// it should be forced
+    {
+        rescuing.Insert(0, (person, table[person]));
+        if (rescuing.Count > RescuingLimit)
+        {
+            PopBack();
+        }
+    }
+
+    public TrappedPerson PopFront()
+    {
+        if (rescuing.Count == 0) return null;
+        var top = rescuing[0];
+        table.Remove(top.Item1);
+        rescuing.Remove(top);
+        return top.Item1;
+    }
+
+    private void PopBack()
+    {
+        var bottom = rescuing[^1];
+        rescuing.Remove(bottom);
+        Insert(bottom.Item1, bottom.Item2);
+    }
+    
+    public void Insert(TrappedPerson person, Priority priority)
+    {
+        if (!table.ContainsKey(person))
+        {
+            table.Add(person, priority);
+            InnerInsert(person, priority);
+        }
+        else
+        {
+            RemovePerson(person, table[person]);
+            InnerInsert(person, priority);
+        }
+    }
+
+    
     /// <summary>
     /// Get the top in the whole queue include high, mid and low.
     /// </summary>
     /// <returns>The element of highest priority or <b>null</b></returns>
-    public TrappedPerson Top()
+    private TrappedPerson Top()
     {
         if (HighCount != 0)
         {
@@ -49,10 +107,10 @@ public class Rescue
     /// Pop out the element of highest priority in the whole queue.
     /// </summary>
     /// <returns>Is there anything to pop.</returns>
-    public TrappedPerson Pop()
+    private TrappedPerson Pop()
     {
         var top = Top();
-        Remove(top, table[top]);
+        RemovePerson(top, table[top]);
         return top;
     }
 
@@ -60,7 +118,7 @@ public class Rescue
     /// Get the top in the high queue.
     /// </summary>
     /// <returns>The element of highest priority or <b>null</b></returns>
-    public TrappedPerson HighTop()
+    private TrappedPerson HighTop()
     {
         if (HighCount == 0) return null;
         return high[^1];
@@ -70,31 +128,21 @@ public class Rescue
     /// Pop out the element of highest priority in the high queue.
     /// </summary>
     /// <returns>Is there anything to pop.</returns>
-    public TrappedPerson HighPop()
+    private TrappedPerson HighPop()
     {
         var top = HighTop();
-        Remove(top, Priority.High);
+        RemovePerson(top, Priority.High);
         return top;
     }
-
-    public void Insert(TrappedPerson person, Priority priority)
-    {
-        if (!table.ContainsKey(person))
-        {
-            table.Add(person, priority);
-            InnerInsert(person, priority);
-        }
-        else
-        {
-            Remove(person, priority);
-            InnerInsert(person, priority);
-        }
-    }
-
-    private void Remove(TrappedPerson person, Priority priority)
+    
+    private void RemoveTable(TrappedPerson person)
     {
         if (!table.ContainsKey(person))  return;
         table.Remove(person);
+    }
+    
+    private void RemovePerson(TrappedPerson person, Priority priority)
+    {
         switch (priority)
         {
             case Priority.High:
@@ -116,7 +164,7 @@ public class Rescue
         switch (priority)
         {
             case Priority.High:
-                high.Add(person);
+                PushFront(person);
                 break;
             case Priority.Mid:
                 mid.Add(person);
