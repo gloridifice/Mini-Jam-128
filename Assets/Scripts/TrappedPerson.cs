@@ -155,7 +155,7 @@ public class TrappedPerson : MonoBehaviour
     
     private void Awake()
     {
-        timer = GameObject.Find("GameManager").GetComponent<Timer>();
+        timer = GameObject.Find("LevelManager").GetComponent<Timer>();
     }
 
     private void Start()
