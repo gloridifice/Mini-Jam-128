@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 
-public class TriageTag
+namespace TriageTags
 {
-    public Color color;
-
-    public TriageTag(Color color)
+    public class TriageTag
     {
-        this.color = color;
+        public Color color;
+
+        public TriageTag(Color color)
+        {
+            this.color = color;
+        }
     }
 }

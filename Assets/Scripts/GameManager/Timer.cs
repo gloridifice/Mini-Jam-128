@@ -1,20 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+namespace GameManager
 {
-    private float _time;
-    /// <summary>
-    /// time passed in seconds
-    /// </summary>
-    public float Tick { get => _time; }
-    public int IntTick { get => (int)_time; }
-
-    private void FixedUpdate()
+    public class Timer : MonoBehaviour
     {
-        _time += Time.fixedDeltaTime;
-        // Debug.Log("time: " + Tick);
+        private float time;
+        /// <summary>
+        /// time passed in seconds
+        /// </summary>
+        public float Tick { get => time; }
+        public int IntTick { get => (int)time; }
+
+        private void FixedUpdate()
+        {
+            time += Time.fixedDeltaTime;
+            // Debug.Log("time: " + Tick);
+        }
     }
 }

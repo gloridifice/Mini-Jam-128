@@ -1,36 +1,37 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Counter : MonoBehaviour
+namespace GameManager
 {
-    private List<TrappedPerson> _savedPersons;
-    private List<TrappedPerson> _diedPersons;
-
-    public List<TrappedPerson> SavedPersons
+    public class Counter : MonoBehaviour
     {
-        get => _savedPersons;
-    }
+        private List<TrappedPerson> savedPersons;
+        private List<TrappedPerson> diedPersons;
 
-    public List<TrappedPerson> DiedPersons
-    {
-        get => _diedPersons;
-    }
+        public List<TrappedPerson> SavedPersons
+        {
+            get => savedPersons;
+        }
 
-    private void Awake()
-    {
-        _savedPersons = new List<TrappedPerson>();
-        _diedPersons = new List<TrappedPerson>();
-    }
+        public List<TrappedPerson> DiedPersons
+        {
+            get => diedPersons;
+        }
 
-    public void AddSavedPerson(TrappedPerson tar)
-    {
-        _savedPersons.Add(tar);
-    }
+        private void Awake()
+        {
+            savedPersons = new List<TrappedPerson>();
+            diedPersons = new List<TrappedPerson>();
+        }
 
-    public void AddDiedPerson(TrappedPerson tar)
-    {
-        _diedPersons.Add(tar);
+        public void AddSavedPerson(TrappedPerson tar)
+        {
+            savedPersons.Add(tar);
+        }
+
+        public void AddDiedPerson(TrappedPerson tar)
+        {
+            diedPersons.Add(tar);
+        }
     }
 }

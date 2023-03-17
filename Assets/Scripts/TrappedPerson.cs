@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameManager;
+using TriageTags;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -34,13 +36,13 @@ public class TrappedPerson : MonoBehaviour
     public float time;
     
     public Age age;
-    public MeasureStage Heartbeat => GetHeartbeat(time - _timer.Tick);
+    public MeasureStage Heartbeat => GetHeartbeat(time - timer.Tick);
     public MeasureStage RespiratoryRate => Heartbeat;
 
-    public TriageTag triageTag = TriageTags.None;
+    public TriageTag triageTag = TriageTags.TriageTags.None;
     public PersonStatus status;
 
-    private Timer _timer;
+    private Timer timer;
 
     #region InfoGetting
         
@@ -57,12 +59,12 @@ public class TrappedPerson : MonoBehaviour
         
         private int TimeAccumulation()
         {
-            return _timer.IntTick - _startTime;
+            return timer.IntTick - _startTime;
         }
 
         private void GetStartTime()
         {
-            _startTime = _timer.IntTick;
+            _startTime = timer.IntTick;
         }
 
         private void CheckPoints()
@@ -123,7 +125,7 @@ public class TrappedPerson : MonoBehaviour
 
     private void Awake()
     {
-        _timer = GameObject.Find("GameManager").GetComponent<Timer>();
+        timer = GameObject.Find("GameManager").GetComponent<Timer>();
     }
 
     private void Start()
