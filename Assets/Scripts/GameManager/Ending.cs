@@ -14,7 +14,7 @@ namespace GameManager
 
         private void Endings()
         {
-            Debug.Log("end");
+            //Debug.Log("end");
         }
     
         //test
