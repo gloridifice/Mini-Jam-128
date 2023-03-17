@@ -39,15 +39,6 @@ public class Rescue
         return bottom; 
     }
 
-    private void PushFront(TrappedPerson person)
-    {
-        rescuing.Insert(0, (person, table[person]));
-        if (rescuing.Count > RescuingLimit)
-        {
-            PopBack();
-        }
-    }
-
     public TrappedPerson PopFront()
     {
         if (rescuing.Count == 0) return null;
@@ -57,14 +48,6 @@ public class Rescue
         return top.Item1;
     }
 
-    private void PopBack()
-    {
-        var bottom = rescuing[^1];
-        rescuing.Remove(bottom);
-        Insert(bottom.Item1, bottom.Item2);
-        bottom.Item1.BreakRescue();
-    }
-    
     public void Insert(TrappedPerson person, Priority priority)
     {
         if (!table.ContainsKey(person))
@@ -77,6 +60,43 @@ public class Rescue
             RemovePerson(person, table[person]);
             InnerInsert(person, priority);
         }
+    }
+
+    public bool Find(TrappedPerson person)
+    {
+        return table.ContainsKey(person);
+    }
+
+    public TrappedPerson Remove(TrappedPerson person)
+    {
+        if (!Find(person)) return null;
+        foreach (var (pe, pr) in rescuing)
+        {
+            if (pe == person) rescuing.Remove((pe, pr));
+            table.Remove(person);
+            return pe;
+        }
+        var priority = table[person];
+        RemovePerson(person, priority);
+        RemoveTable(person);
+        return person;
+    }
+    
+    private void PushFront(TrappedPerson person)
+    {
+        rescuing.Insert(0, (person, table[person]));
+        if (rescuing.Count > RescuingLimit)
+        {
+            PopBack();
+        }
+    }
+    
+    private void PopBack()
+    {
+        var bottom = rescuing[^1];
+        rescuing.Remove(bottom);
+        Insert(bottom.Item1, bottom.Item2);
+        bottom.Item1.BreakRescue();
     }
 
     

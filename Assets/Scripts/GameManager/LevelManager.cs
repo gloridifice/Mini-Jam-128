@@ -33,7 +33,11 @@ namespace GameManager
                 {
                     person.status = PersonStatus.Died;
                     counter.AddDiedPerson(person);
-                    // TODO: add a event
+                    if (rescue.Find(person))
+                    {
+                        rescue.Remove(person);
+                    }
+                    // TODO: how does ui deal with a person's death?
                     // Debug.Log("person " + person.name + " died");
                 }
 
@@ -48,7 +52,7 @@ namespace GameManager
 
         private void FreshRescueList()
         {
-            
+            //
         }
 
         public void AddRescue(TrappedPerson person, Rescue.Priority priority)
