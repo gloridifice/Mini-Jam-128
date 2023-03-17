@@ -33,6 +33,7 @@ namespace GameManager
                 {
                     person.status = PersonStatus.Died;
                     counter.AddDiedPerson(person);
+                    // TODO: add a event
                     // Debug.Log("person " + person.name + " died");
                 }
 
@@ -42,6 +43,20 @@ namespace GameManager
                     counter.AddSavedPerson(person);
                     //Debug.Log("person " + person.name + " saved");
                 }
+            }
+        }
+
+        private void FreshRescueList()
+        {
+            
+        }
+
+        public void AddRescue(TrappedPerson tar, Rescue.Priority priority)
+        {
+            switch (priority)
+            {
+                case Rescue.Priority.High:
+                    break;
             }
         }
     }
