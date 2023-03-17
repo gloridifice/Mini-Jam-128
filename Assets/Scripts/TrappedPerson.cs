@@ -130,6 +130,7 @@ public class TrappedPerson : MonoBehaviour
     [HideInInspector]public int rescueTime;
     private int rescueTimeStart;
     private bool isGettingRescue;
+    public bool IsGettingRescue => isGettingRescue;
     
     public void StartRescue()
     {
