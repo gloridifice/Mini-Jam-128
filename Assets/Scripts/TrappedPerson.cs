@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public enum PersonStatus
 {
@@ -16,10 +18,13 @@ public enum PersonStatus
 /// </summary>
 public class TrappedPerson : MonoBehaviour
 {
-    public float health;
-    public Age age;
-    // todo: fill in other basic info of person
+    public float time;
     
+    public Age age;
+    //public int hb;
+    public int Heartbeat => GetHeartbeat(time - _timer.Tick);
+    public int RespiratoryRate => GetRespiratoryRate(Heartbeat);
+
     public TriageTag triageTag = TriageTags.None;
     public PersonStatus status;
 
@@ -128,10 +133,43 @@ public class TrappedPerson : MonoBehaviour
     private void Update()
     {
         CheckPoints();
+
+        //hb = Heartbeat;
     }
 
     // todo: figure out how do deal with subtitle, heartbeat and health facts
     // todo: how do a person get saved
-    
-    
+
+    // todo: add more model
+    // todo: people will die
+    private int GetHeartbeat(float time)
+    {
+        var exactBPM = GetBPM(time);
+        Debug.Log(exactBPM);
+        return exactBPM switch
+        {
+            (>= 0) and (< 45) => 0,
+            (>= 45) and (< 60) => 1,
+            (>= 60) and (< 100) => 2,
+            (>= 100) and (< 120) => 3,
+            (>= 120) => 4,
+        };
+    }
+
+    private uint GetBPM(float t)
+    {
+        return t switch
+        {
+            (>= 0) and (< 40) => (uint)Random.Range(60, 80),
+            (>= 40) and (< 120) => (uint)Random.Range(120, 140),
+            (>= 120) and (< 220) => (uint)Random.Range(100, 120),
+            (>= 220) and (< 300) => (uint)Random.Range(60, 80),
+            _ => throw new OverflowException("Impossible time"),
+        };
+    }
+
+    private int GetRespiratoryRate(int hb)
+    {
+        return hb;
+    }
 }
