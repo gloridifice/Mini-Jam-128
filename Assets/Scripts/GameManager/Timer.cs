@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     /// time passed in seconds
     /// </summary>
     public float Tick { get => _time; }
+    public int IntTick { get => (int)_time; }
 
     private void FixedUpdate()
     {
