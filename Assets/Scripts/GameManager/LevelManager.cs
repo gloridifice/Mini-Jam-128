@@ -16,6 +16,7 @@ namespace GameManager
         {
             timer = GetComponent<Timer>();
             counter = GetComponent<Counter>();
+            rescue = new Rescue();
         }
 
         private void Update()

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
+// [Serializable]
 public class Rescue
 {
     private List<TrappedPerson> high;
@@ -49,11 +49,11 @@ public class Rescue
     /// Pop out the element of highest priority in the whole queue.
     /// </summary>
     /// <returns>Is there anything to pop.</returns>
-    public bool Pop()
+    public TrappedPerson Pop()
     {
-        if (Count == 0) return false;
-        Remove(Top(), table[Top()]);
-        return true;
+        var top = Top();
+        Remove(top, table[top]);
+        return top;
     }
 
     /// <summary>
@@ -70,11 +70,11 @@ public class Rescue
     /// Pop out the element of highest priority in the high queue.
     /// </summary>
     /// <returns>Is there anything to pop.</returns>
-    public bool HighPop()
+    public TrappedPerson HighPop()
     {
-        if (HighCount == 0) return false;
-        Remove(HighTop(), Priority.High);
-        return true;
+        var top = HighTop();
+        Remove(top, Priority.High);
+        return top;
     }
 
     public void Insert(TrappedPerson person, Priority priority)
@@ -93,6 +93,8 @@ public class Rescue
 
     private void Remove(TrappedPerson person, Priority priority)
     {
+        if (!table.ContainsKey(person))  return;
+        table.Remove(person);
         switch (priority)
         {
             case Priority.High:
