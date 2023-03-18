@@ -1,4 +1,6 @@
+using System;
 using System.Diagnostics;
+using GameInput;
 using GameManager;
 using TriageTags;
 using UnityEngine;
@@ -11,6 +13,7 @@ namespace UI.Viewport
     {
         public Image image;
         public TrappedPerson person;
+        public bool isMouseOver;
 
         public void Init(TrappedPerson person)
         {
@@ -18,10 +21,23 @@ namespace UI.Viewport
 
             FreshPosition();
             LevelManager.Instance.CameraController.OnCameraMoved += OnCameraMoved;
+            LevelManager.Instance.OnTrappedPersonTagChanged += OnTagChanged;
         }
 
-        void OnTagChanged(TriageTag preTag, TriageTag newTag)
+        private void Update()
         {
+            if (isMouseOver)
+            {
+                if (Input.GetKeyDown(KeyCode.H)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Red);
+                if (Input.GetKeyDown(KeyCode.J)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Yellow);
+                if (Input.GetKeyDown(KeyCode.K)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Green);
+                if (Input.GetKeyDown(KeyCode.L)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Black);
+            }
+        }
+
+        void OnTagChanged(TrappedPerson person, TriageTag preTag, TriageTag newTag)
+        {
+            if (this.person != person) return;
             image.color = newTag.color;
         }
 
@@ -43,11 +59,12 @@ namespace UI.Viewport
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            
+            isMouseOver = true;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            isMouseOver = false;
         }
     }
 }

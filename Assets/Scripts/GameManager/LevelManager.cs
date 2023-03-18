@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameInput;
 using UI;
 using UI.Minimap;
 using UI.Viewport;
@@ -127,17 +128,19 @@ namespace GameManager
             }
         }
 
-        
-        
+
+        public event Action<TrappedPerson, TriageTag, TriageTag> OnTrappedPersonTagChanged = (t, triageTag, tag1) => {};
         public void MakeTag(TrappedPerson person, TriageTag triageTag)
         {
             // todo: deal with black tag
-            if (person.triageTag == triageTag || person.triageTag == TriageTags.TriageTags.Black) return;
-            
+            if (person.triageTag == triageTag) return;
+
+            TriageTag preTag = person.triageTag;
             rescue.Insert(person, triageTag);
+            OnTrappedPersonTagChanged.Invoke(person, preTag, triageTag);
         }
 
-        #region endings
+        #region Endings
 
         [SerializeField] private int timeToEnd;
         
