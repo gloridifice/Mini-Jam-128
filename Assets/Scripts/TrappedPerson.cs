@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using GameManager;
 using TriageTags;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -37,8 +38,10 @@ public class TrappedPerson : MonoBehaviour
 
     public Age age;
     public MeasureStage Heartbeat => GetHeartbeat(time - Timer.Tick);
+    public uint BPM => GetBPM(time - Timer.Tick);
     public MeasureStage RespiratoryRate => Heartbeat;
-
+    public int InjurySeverity => GetInjurySeverity();
+    
     private TriageTag triageTag = TriageTags.TriageTags.None;
 
     public TriageTag TriageTag
@@ -216,5 +219,52 @@ public class TrappedPerson : MonoBehaviour
             (>= 220) and (< 300) => (uint)Random.Range(60, 80),
             _ => 0,
         };
+    }
+
+    private int GetInjurySeverity()
+    {
+        int injurySeverity = 0;
+        injurySeverity += (int)age.age;
+        injurySeverity += ISFromHeartbeat(Heartbeat);
+        injurySeverity += ISFromRespiratoryRate(RespiratoryRate);
+
+        return injurySeverity;
+    }
+
+    private int ISFromRespiratoryRate(MeasureStage respiratoryRate)
+    {
+        switch (respiratoryRate)
+        {
+            case MeasureStage.Lowest:
+            case MeasureStage.Highest:
+                return 2;
+            case MeasureStage.Low:
+            case MeasureStage.High:
+                return 1;
+            case MeasureStage.Normal:
+                return 0;
+            case MeasureStage.Zero:
+            default:
+                throw new ArgumentOutOfRangeException(nameof(respiratoryRate), respiratoryRate, null);
+        }
+    }
+
+    private int ISFromHeartbeat(MeasureStage heartbeat)
+    {
+        switch (heartbeat)
+        {
+            case MeasureStage.Lowest:
+            case MeasureStage.Highest:
+                return 3;
+            case MeasureStage.Low:
+                return 2;
+            case MeasureStage.Normal:
+                return 0;
+            case MeasureStage.High:
+                return 1;
+            case MeasureStage.Zero:
+            default:
+                throw new ArgumentOutOfRangeException(nameof(heartbeat), heartbeat, null);
+        }
     }
 }
