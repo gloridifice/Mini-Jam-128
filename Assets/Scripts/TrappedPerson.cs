@@ -80,9 +80,9 @@ public class TrappedPerson : MonoBehaviour
     private const int TimeToGetVoice = 3;
     private const int TimeToGetHeartbeat = 6;
     private const int TimeToGetFullInfo = 9;
-    private event EventHandler ShowVoice;
-    private event EventHandler ShowHeartbeat;
-    private event EventHandler ShowFullInfo;
+    // private event EventHandler ShowVoice;
+    // private event EventHandler ShowHeartbeat;
+    // private event EventHandler ShowFullInfo;
 
     private int TimeAccumulation()
     {
@@ -99,20 +99,20 @@ public class TrappedPerson : MonoBehaviour
         if (isGettingInfo)
         {
             currentTime = accumulatedTime + TimeAccumulation();
-            if (currentTime > TimeToGetVoice)
-            {
-                ShowVoice?.Invoke(this, EventArgs.Empty);
-            }
-
-            if (currentTime > TimeToGetHeartbeat)
-            {
-                ShowHeartbeat?.Invoke(this, EventArgs.Empty);
-            }
-
-            if (currentTime > TimeToGetFullInfo)
-            {
-                ShowFullInfo?.Invoke(this, EventArgs.Empty);
-            }
+            // if (currentTime > TimeToGetVoice)
+            // {
+            //     ShowVoice?.Invoke(this, EventArgs.Empty);
+            // }
+            //
+            // if (currentTime > TimeToGetHeartbeat)
+            // {
+            //     ShowHeartbeat?.Invoke(this, EventArgs.Empty);
+            // }
+            //
+            // if (currentTime > TimeToGetFullInfo)
+            // {
+            //     ShowFullInfo?.Invoke(this, EventArgs.Empty);
+            // }
         }
         else
         {
@@ -127,26 +127,26 @@ public class TrappedPerson : MonoBehaviour
         }
     }
 
-    private void EShowVoice(System.Object sender, EventArgs args)
-    {
-        // TODO: impl needed;
-        //Debug.Log("voice");
-        ShowVoice -= EShowVoice; // remove this if u want to call every frame
-    }
-
-    private void EShowHeartbeat(System.Object sender, EventArgs args)
-    {
-        // TODO: impl needed;
-        //Debug.Log("heartbeat");
-        ShowHeartbeat -= EShowHeartbeat; // remove this if u want to call every frame
-    }
-
-    private void EShowFullInfo(System.Object sender, EventArgs args)
-    {
-        // TODO: impl needed;
-        //Debug.Log("fullInfo");
-        ShowFullInfo -= EShowFullInfo; // remove this if u want to call every frame
-    }
+    // private void EShowVoice(System.Object sender, EventArgs args)
+    // {
+    //     // TODO: impl needed;
+    //     //Debug.Log("voice");
+    //     ShowVoice -= EShowVoice; // remove this if u want to call every frame
+    // }
+    //
+    // private void EShowHeartbeat(System.Object sender, EventArgs args)
+    // {
+    //     // TODO: impl needed;
+    //     //Debug.Log("heartbeat");
+    //     ShowHeartbeat -= EShowHeartbeat; // remove this if u want to call every frame
+    // }
+    //
+    // private void EShowFullInfo(System.Object sender, EventArgs args)
+    // {
+    //     // TODO: impl needed;
+    //     //Debug.Log("fullInfo");
+    //     ShowFullInfo -= EShowFullInfo; // remove this if u want to call every frame
+    // }
 
     #endregion
 
@@ -183,9 +183,9 @@ public class TrappedPerson : MonoBehaviour
     private void Start()
     {
         GetStartTime();
-        ShowVoice += EShowVoice;
-        ShowHeartbeat += EShowHeartbeat;
-        ShowFullInfo += EShowFullInfo;
+        // ShowVoice += EShowVoice;
+        // ShowHeartbeat += EShowHeartbeat;
+        // ShowFullInfo += EShowFullInfo;
     }
 
     private void Update()

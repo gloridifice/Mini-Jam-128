@@ -12,6 +12,8 @@ public class NovelRescue
     private List<TrappedPerson> low;
     public List<TrappedPerson> rescuing;
 
+    public int Count => high.Count + mid.Count + low.Count + rescuing.Count;
+
     public NovelRescue()
     {
         high = new List<TrappedPerson>();
