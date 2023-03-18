@@ -8,15 +8,11 @@ namespace GameManager
         private List<TrappedPerson> savedPersons;
         private List<TrappedPerson> diedPersons;
 
-        public List<TrappedPerson> SavedPersons
-        {
-            get => savedPersons;
-        }
+        public List<TrappedPerson> SavedPersons => savedPersons;
+        public List<TrappedPerson> DiedPersons => diedPersons;
 
-        public List<TrappedPerson> DiedPersons
-        {
-            get => diedPersons;
-        }
+        public int SavedPersonsCount => savedPersons.Count;
+        public int DiedPersonsCount => diedPersons.Count;
 
         private void Awake()
         {
