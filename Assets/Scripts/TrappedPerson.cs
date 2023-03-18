@@ -181,7 +181,7 @@ public class TrappedPerson : MonoBehaviour
     private MeasureStage GetHeartbeat(float leftTime)
     {
         var exactBPM = GetBPM(leftTime);
-        Debug.Log(exactBPM);
+        // Debug.Log(exactBPM);
         return exactBPM switch
         {
             0 => MeasureStage.Zero,

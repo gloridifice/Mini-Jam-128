@@ -2,7 +2,7 @@
 
 namespace TriageTags
 {
-    public class TriageTags
+    public static class TriageTags
     {
         public static readonly TriageTag Red = new TriageTag(Color.red);
         public static readonly TriageTag Yellow = new TriageTag(Color.yellow);
