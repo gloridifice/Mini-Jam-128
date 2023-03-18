@@ -40,7 +40,7 @@ namespace GameManager
                         }
                     }
                 }
-
+                
                 return trappedPersons;
             }
         }
@@ -112,7 +112,7 @@ namespace GameManager
                 if (person.rescueTime >= TrappedPerson.TimeToRescue)
                 {
                     person.status = PersonStatus.Saved;
-                    counter.AddSavedPerson(person);
+                    Counter.AddSavedPerson(person);
                 }
             }
         }
