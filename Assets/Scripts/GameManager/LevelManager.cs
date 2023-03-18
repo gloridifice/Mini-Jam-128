@@ -55,6 +55,7 @@ namespace GameManager
         private Timer timer;
         [FormerlySerializedAs("novelRescue")] public NovelRescue rescue;
         public Timer Timer => this.LazyGetComponent(timer);
+        public int TimeRemain => timeToEnd - Timer.IntTick;// how long from now to end
         private CameraController cameraController;
 
         public CameraController CameraController
@@ -142,6 +143,7 @@ namespace GameManager
 
         #region Endings
 
+        // how long this game will be
         [SerializeField] private int timeToEnd;
 
         private void Endings()
