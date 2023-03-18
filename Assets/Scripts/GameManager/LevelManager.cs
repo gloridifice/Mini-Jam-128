@@ -9,9 +9,11 @@ using UnityEngine.Serialization;
 
 namespace GameManager
 {
-    [RequireComponent(typeof(Counter), typeof(Ending))]
+    [RequireComponent(typeof(Counter))]
     public class LevelManager : MonoBehaviour
     {
+        private event EventHandler End;
+        
         public static LevelManager Instance;
 
         #region EditorInspector
@@ -77,6 +79,7 @@ namespace GameManager
         private void Start()
         {
             rescue = new NovelRescue();
+            End += (_, _) => { Endings(); };
         }
 
         private LevelInput input;
@@ -91,6 +94,7 @@ namespace GameManager
             FreshPersonStatus();
             FreshRescueList();
             DebugUpdate();
+            CheckEndings();
         }
 
         private void FreshPersonStatus()
@@ -135,6 +139,31 @@ namespace GameManager
             rescue.Insert(person, triageTag);
         }
 
+        #region endings
+
+        [SerializeField] private int timeToEnd;
+        
+        private void Endings()
+        {
+            // TODO: impl endings
+            Debug.Log("end");
+        }
+
+        private void CheckEndings()
+        {
+            if (Timer.IntTick > timeToEnd)
+            {
+                End ?.Invoke(null, EventArgs.Empty);
+            }
+
+            if (Counter.SavedPersonsCount + Counter.DiedPersonsCount >= TrappedPersons.Count)
+            {
+                End ?.Invoke(null, EventArgs.Empty);
+            }
+        }
+
+        #endregion
+        
 
         #region Debug
 
