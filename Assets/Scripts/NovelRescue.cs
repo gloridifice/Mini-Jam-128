@@ -7,9 +7,9 @@ public class NovelRescue
 {
     public const int RescuingLimit = 2;
     
-    public List<TrappedPerson> high;
-    public List<TrappedPerson> mid;
-    public List<TrappedPerson> low;
+    private List<TrappedPerson> high;
+    private List<TrappedPerson> mid;
+    private List<TrappedPerson> low;
     public List<TrappedPerson> rescuing;
 
     public NovelRescue()
