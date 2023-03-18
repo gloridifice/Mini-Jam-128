@@ -104,7 +104,7 @@ namespace GameManager
             foreach (var person in TrappedPersons)
             {
                 if (person.Status is PersonStatus.Died or PersonStatus.Saved) continue;
-                if (person.time < Timer.Tick)
+                if (person.time < Timer.IntTick)
                 {
                     person.Status = PersonStatus.Died;
                     Counter.AddDiedPerson(person);

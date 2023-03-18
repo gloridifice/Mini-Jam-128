@@ -34,11 +34,12 @@ public enum MeasureStage
 /// </summary>
 public class TrappedPerson : MonoBehaviour
 {
-    public float time;
+    public int time;
+    public int TimeRemain => time - Timer.IntTick;
 
     public Age age;
-    public MeasureStage Heartbeat => GetHeartbeat(time - Timer.Tick);
-    public uint BPM => GetBPM(time - Timer.Tick);
+    public MeasureStage Heartbeat => GetHeartbeat(time - Timer.IntTick);
+    public uint BPM => GetBPM(time - Timer.IntTick);
     public MeasureStage RespiratoryRate => Heartbeat;
     public int InjurySeverity => GetInjurySeverity();
     
@@ -194,7 +195,7 @@ public class TrappedPerson : MonoBehaviour
     }
 
     // todo: add more model
-    private MeasureStage GetHeartbeat(float leftTime)
+    private MeasureStage GetHeartbeat(int leftTime)
     {
         var exactBPM = GetBPM(leftTime);
         // Debug.Log(exactBPM);
@@ -209,7 +210,7 @@ public class TrappedPerson : MonoBehaviour
         };
     }
 
-    private uint GetBPM(float t)
+    private uint GetBPM(int t)
     {
         return t switch
         {
