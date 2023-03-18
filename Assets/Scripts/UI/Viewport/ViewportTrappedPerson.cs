@@ -20,8 +20,9 @@ namespace UI.Viewport
             this.person = person;
 
             FreshPosition();
+            person.OnTrappedPersonTagChanged += OnTagChanged;
+            person.OnPersonStatusChanged += OnStatusChanged;
             LevelManager.Instance.CameraController.OnCameraMoved += OnCameraMoved;
-            LevelManager.Instance.OnTrappedPersonTagChanged += OnTagChanged;
         }
 
         private void Update()
@@ -35,10 +36,22 @@ namespace UI.Viewport
             }
         }
 
-        void OnTagChanged(TrappedPerson person, TriageTag preTag, TriageTag newTag)
+        void OnTagChanged(TriageTag preTag, TriageTag newTag)
         {
-            if (this.person != person) return;
             image.color = newTag.color;
+        }
+
+        void OnStatusChanged(PersonStatus preStatus, PersonStatus newStatus)
+        {
+            if (newStatus == PersonStatus.Saved)
+            {
+                gameObject.SetActive(false);
+            }
+
+            if (newStatus == PersonStatus.Died)
+            {
+                image.color = Color.black;
+            }
         }
 
         void OnCameraMoved(CameraController controller)

@@ -34,93 +34,116 @@ public enum MeasureStage
 public class TrappedPerson : MonoBehaviour
 {
     public float time;
-    
+
     public Age age;
     public MeasureStage Heartbeat => GetHeartbeat(time - Timer.Tick);
     public MeasureStage RespiratoryRate => Heartbeat;
 
-    public TriageTag triageTag = TriageTags.TriageTags.None;
-    public PersonStatus status = PersonStatus.Waiting;
+    private TriageTag triageTag = TriageTags.TriageTags.None;
+
+    public TriageTag TriageTag
+    {
+        get => triageTag;
+        set
+        {
+            OnTrappedPersonTagChanged?.Invoke(triageTag, value);
+            triageTag = value;
+        }
+    }
+    private PersonStatus status = PersonStatus.Waiting;
+    public PersonStatus Status
+    {
+        get => status;
+        set
+        {
+            OnPersonStatusChanged.Invoke(status, value);
+            status = value;
+        }
+    }
+
+    public event Action<TriageTag, TriageTag> OnTrappedPersonTagChanged = (triageTag, tag1) => { };
+
+    public event Action<PersonStatus, PersonStatus> OnPersonStatusChanged = (status, arg3) => { };
 
     private Timer Timer => LevelManager.Instance.Timer;
 
     #region InfoGetting
-        
-        private bool isGettingInfo;// TODO: impl change between true and false
-        private int startTime;
-        private int accumulatedTime;
-        private int currentTime;
-        private const int TimeToGetVoice = 3;
-        private const int TimeToGetHeartbeat = 6;
-        private const int TimeToGetFullInfo = 9;
-        private event EventHandler ShowVoice;
-        private event EventHandler ShowHeartbeat;
-        private event EventHandler ShowFullInfo;
-        
-        private int TimeAccumulation()
-        {
-            return Timer.IntTick - startTime;
-        }
 
-        private void GetStartTime()
-        {
-            startTime = Timer.IntTick;
-        }
+    private bool isGettingInfo; // TODO: impl change between true and false
+    private int startTime;
+    private int accumulatedTime;
+    private int currentTime;
+    private const int TimeToGetVoice = 3;
+    private const int TimeToGetHeartbeat = 6;
+    private const int TimeToGetFullInfo = 9;
+    private event EventHandler ShowVoice;
+    private event EventHandler ShowHeartbeat;
+    private event EventHandler ShowFullInfo;
 
-        private void CheckInspectingStatus()
+    private int TimeAccumulation()
+    {
+        return Timer.IntTick - startTime;
+    }
+
+    private void GetStartTime()
+    {
+        startTime = Timer.IntTick;
+    }
+
+    private void CheckInspectingStatus()
+    {
+        if (isGettingInfo)
         {
-            if (isGettingInfo)
+            currentTime = accumulatedTime + TimeAccumulation();
+            if (currentTime > TimeToGetVoice)
             {
-                currentTime = accumulatedTime + TimeAccumulation();
-                if (currentTime > TimeToGetVoice)
-                {
-                    ShowVoice?.Invoke(this, EventArgs.Empty);
-                }
-
-                if (currentTime > TimeToGetHeartbeat)
-                {
-                    ShowHeartbeat?.Invoke(this, EventArgs.Empty);
-                }
-
-                if (currentTime > TimeToGetFullInfo)
-                {
-                    ShowFullInfo?.Invoke(this, EventArgs.Empty);
-                }
+                ShowVoice?.Invoke(this, EventArgs.Empty);
             }
-            else
+
+            if (currentTime > TimeToGetHeartbeat)
             {
-                accumulatedTime = currentTime switch
-                {
-                    (< TimeToGetVoice) => 0,
-                    (>= TimeToGetVoice) and (< TimeToGetHeartbeat) => TimeToGetVoice,
-                    (>= TimeToGetHeartbeat) and (< TimeToGetFullInfo) => TimeToGetHeartbeat,
-                    (>= TimeToGetFullInfo) => TimeToGetFullInfo,
-                };
-                GetStartTime();
+                ShowHeartbeat?.Invoke(this, EventArgs.Empty);
+            }
+
+            if (currentTime > TimeToGetFullInfo)
+            {
+                ShowFullInfo?.Invoke(this, EventArgs.Empty);
             }
         }
-
-        private void EShowVoice(System.Object sender, EventArgs args)
+        else
         {
-            // TODO: impl needed;
-            //Debug.Log("voice");
-            ShowVoice -= EShowVoice;// remove this if u want to call every frame
+            accumulatedTime = currentTime switch
+            {
+                (< TimeToGetVoice) => 0,
+                (>= TimeToGetVoice) and (< TimeToGetHeartbeat) => TimeToGetVoice,
+                (>= TimeToGetHeartbeat) and (< TimeToGetFullInfo) => TimeToGetHeartbeat,
+                (>= TimeToGetFullInfo) => TimeToGetFullInfo,
+            };
+            GetStartTime();
         }
+    }
 
-        private void EShowHeartbeat(System.Object sender, EventArgs args)
-        {
-            // TODO: impl needed;
-            //Debug.Log("heartbeat");
-            ShowHeartbeat -= EShowHeartbeat;// remove this if u want to call every frame
-        }
+    private void EShowVoice(System.Object sender, EventArgs args)
+    {
+        // TODO: impl needed;
+        //Debug.Log("voice");
+        ShowVoice -= EShowVoice; // remove this if u want to call every frame
+    }
 
-        private void EShowFullInfo(System.Object sender, EventArgs args)
-        {
-            // TODO: impl needed;
-            //Debug.Log("fullInfo");
-            ShowFullInfo -= EShowFullInfo;// remove this if u want to call every frame
-        }
-        
+    private void EShowHeartbeat(System.Object sender, EventArgs args)
+    {
+        // TODO: impl needed;
+        //Debug.Log("heartbeat");
+        ShowHeartbeat -= EShowHeartbeat; // remove this if u want to call every frame
+    }
+
+    private void EShowFullInfo(System.Object sender, EventArgs args)
+    {
+        // TODO: impl needed;
+        //Debug.Log("fullInfo");
+        ShowFullInfo -= EShowFullInfo; // remove this if u want to call every frame
+    }
+
     #endregion
 
 
@@ -150,9 +173,9 @@ public class TrappedPerson : MonoBehaviour
             rescueTime = Timer.IntTick - rescueTimeStart;
         }
     }
-    
+
     #endregion
-    
+
     private void Start()
     {
         GetStartTime();
@@ -166,7 +189,7 @@ public class TrappedPerson : MonoBehaviour
         CheckInspectingStatus();
         GetRescue();
     }
-    
+
     // todo: add more model
     private MeasureStage GetHeartbeat(float leftTime)
     {

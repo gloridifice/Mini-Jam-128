@@ -23,12 +23,12 @@ public class NovelRescue
     public void Insert(TrappedPerson person, TriageTag triageTag)
     {
         // 1. if this is a first enqueue
-        if (person.triageTag == TriageTags.TriageTags.None)
+        if (person.TriageTag == TriageTags.TriageTags.None)
         {
             InnerInsert(person, triageTag);
         }
         // 2. if this is a changing tag
-        else if (person.triageTag != TriageTags.TriageTags.Black)
+        else if (person.TriageTag != TriageTags.TriageTags.Black)
         {
             if (!rescuing.Contains(person))
             {
@@ -48,7 +48,7 @@ public class NovelRescue
             }
         }
 
-        person.triageTag = triageTag;
+        person.TriageTag = triageTag;
         // todo: invoke an event to tell ui that we have changed a tag
     }
 
@@ -79,7 +79,7 @@ public class NovelRescue
 
     public void Remove(TrappedPerson person)
     {
-        if (person.triageTag == TriageTags.TriageTags.None || person.triageTag == TriageTags.TriageTags.Black) return;
+        if (person.TriageTag == TriageTags.TriageTags.None || person.TriageTag == TriageTags.TriageTags.Black) return;
         if (rescuing.Contains(person))
         {
             rescuing.Remove(person);
@@ -139,7 +139,7 @@ public class NovelRescue
 
     private List<TrappedPerson> GetOriginalQueue(TrappedPerson person)
     {
-        var triageTag = person.triageTag;
+        var triageTag = person.TriageTag;
 
         if (triageTag == TriageTags.TriageTags.Red)
         {

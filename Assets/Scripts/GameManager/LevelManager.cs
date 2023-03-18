@@ -14,7 +14,7 @@ namespace GameManager
     public class LevelManager : MonoBehaviour
     {
         private event EventHandler End;
-        
+
         public static LevelManager Instance;
 
         #region EditorInspector
@@ -28,6 +28,7 @@ namespace GameManager
         MinimapManager MinimapManager => levelUIManager.minimapManager;
         ViewportUIManager ViewportUIManager => levelUIManager.viewportUIManager;
         private List<TrappedPerson> trappedPersons;
+
         public List<TrappedPerson> TrappedPersons
         {
             get
@@ -43,7 +44,7 @@ namespace GameManager
                         }
                     }
                 }
-                
+
                 return trappedPersons;
             }
         }
@@ -55,6 +56,7 @@ namespace GameManager
         [FormerlySerializedAs("novelRescue")] public NovelRescue rescue;
         public Timer Timer => this.LazyGetComponent(timer);
         private CameraController cameraController;
+
         public CameraController CameraController
         {
             get
@@ -83,6 +85,7 @@ namespace GameManager
 
         private LevelInput input;
         public LevelInput Input => this.LazyGetComponent(input);
+
         private void Awake()
         {
             Instance = this;
@@ -100,10 +103,10 @@ namespace GameManager
         {
             foreach (var person in TrappedPersons)
             {
-                if (person.status is PersonStatus.Died or PersonStatus.Saved) continue;
+                if (person.Status is PersonStatus.Died or PersonStatus.Saved) continue;
                 if (person.time < Timer.Tick)
                 {
-                    person.status = PersonStatus.Died;
+                    person.Status = PersonStatus.Died;
                     Counter.AddDiedPerson(person);
                     rescue.Remove(person);
                     // TODO: how does ui deal with a person's death?
@@ -114,7 +117,7 @@ namespace GameManager
             {
                 if (person.rescueTime >= TrappedPerson.TimeToRescue)
                 {
-                    person.status = PersonStatus.Saved;
+                    person.Status = PersonStatus.Saved;
                     Counter.AddSavedPerson(person);
                 }
             }
@@ -129,42 +132,38 @@ namespace GameManager
         }
 
 
-        public event Action<TrappedPerson, TriageTag, TriageTag> OnTrappedPersonTagChanged = (t, triageTag, tag1) => {};
         public void MakeTag(TrappedPerson person, TriageTag triageTag)
         {
             // todo: deal with black tag
-            if (person.triageTag == triageTag) return;
-
-            TriageTag preTag = person.triageTag;
+            if (person.TriageTag == triageTag) return;
+            
             rescue.Insert(person, triageTag);
-            OnTrappedPersonTagChanged.Invoke(person, preTag, triageTag);
         }
 
         #region Endings
 
         [SerializeField] private int timeToEnd;
-        
+
         private void Endings()
         {
             // TODO: impl endings
-            Debug.Log("end");
         }
 
         private void CheckEndings()
         {
             if (Timer.IntTick > timeToEnd)
             {
-                End ?.Invoke(null, EventArgs.Empty);
+                End?.Invoke(null, EventArgs.Empty);
             }
 
             if (Counter.SavedPersonsCount + Counter.DiedPersonsCount >= TrappedPersons.Count)
             {
-                End ?.Invoke(null, EventArgs.Empty);
+                End?.Invoke(null, EventArgs.Empty);
             }
         }
 
         #endregion
-        
+
 
         #region Debug
 

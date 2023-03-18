@@ -32,7 +32,6 @@ namespace GameInput
 
         void OnActionTriggered(InputAction.CallbackContext value)
         {
-            print(value.action.name);
             if (value.action.name == "Move")
             {
                 Move = value.ReadValue<Vector2>();
