@@ -81,7 +81,7 @@ namespace GameManager
         private void Start()
         {
             rescue = new NovelRescue();
-            End += (_, _) => { Endings(); };
+            End += (_, _) => { OnEnd(); };
         }
 
         private LevelInput input;
@@ -146,7 +146,7 @@ namespace GameManager
         // how long this game will be
         [SerializeField] private int timeToEnd;
 
-        private void Endings()
+        private void OnEnd()
         {
             // TODO: impl endings
         }
