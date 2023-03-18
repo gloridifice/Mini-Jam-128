@@ -29,6 +29,11 @@ public enum MeasureStage
     Zero,
 }
 
+public enum SubtitleTag
+{
+    General,
+}
+
 /// <summary>
 /// <para>Class of trapped person.</para>
 /// </summary>
@@ -42,7 +47,8 @@ public class TrappedPerson : MonoBehaviour
     public uint BPM => GetBPM(time - Timer.IntTick);
     public MeasureStage RespiratoryRate => Heartbeat;
     public int InjurySeverity => GetInjurySeverity();
-    
+
+    public SubtitleTag subtitleTag;
     private TriageTag triageTag = TriageTags.TriageTags.None;
 
     public TriageTag TriageTag
