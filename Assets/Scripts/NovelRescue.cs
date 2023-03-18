@@ -55,21 +55,26 @@ public class NovelRescue
     public void ShiftUp()
     {
         if (high.Count + mid.Count + low.Count == 0) return;
+        TrappedPerson tmp;
         if (high.Count != 0)
         {
-            rescuing.Add(high[^1]);
-            high.Remove(high[^1]);
+            tmp = high[^1];
+            rescuing.Add(tmp);
+            high.Remove(tmp);
         }
         else if (mid.Count != 0)
         {
-            rescuing.Add(mid[0]);
-            mid.Remove(mid[0]);
+            tmp = mid[0];
+            rescuing.Add(tmp);
+            mid.Remove(tmp);
         }
         else
         {
-            rescuing.Add(low[0]);
-            low.Remove(low[0]);
+            tmp = low[0];
+            rescuing.Add(tmp);
+            low.Remove(tmp);
         }
+        tmp.StartRescue();
     }
 
     public void Remove(TrappedPerson person)
@@ -94,6 +99,7 @@ public class NovelRescue
         {
             // todo: deal with red tag
             rescuing.Insert(0, person);
+            person.StartRescue();
             Reordering();
         }
 
