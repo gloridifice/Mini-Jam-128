@@ -59,7 +59,9 @@ namespace GameManager
             }
         }
 
-        public void AddRescue(TrappedPerson person, TriageTag triageTag)
+        
+        
+        public void MakeTag(TrappedPerson person, TriageTag triageTag)
         {
             // todo: deal with black tag
             if (person.triageTag == triageTag || person.triageTag == TriageTags.TriageTags.Black) return;
