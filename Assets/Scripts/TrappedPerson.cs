@@ -36,13 +36,13 @@ public class TrappedPerson : MonoBehaviour
     public float time;
     
     public Age age;
-    public MeasureStage Heartbeat => GetHeartbeat(time - timer.Tick);
+    public MeasureStage Heartbeat => GetHeartbeat(time - Timer.Tick);
     public MeasureStage RespiratoryRate => Heartbeat;
 
     public TriageTag triageTag = TriageTags.TriageTags.None;
     public PersonStatus status;
 
-    private Timer timer;
+    private Timer Timer => LevelManager.Instance.Timer;
 
     #region InfoGetting
         
@@ -59,12 +59,12 @@ public class TrappedPerson : MonoBehaviour
         
         private int TimeAccumulation()
         {
-            return timer.IntTick - startTime;
+            return Timer.IntTick - startTime;
         }
 
         private void GetStartTime()
         {
-            startTime = timer.IntTick;
+            startTime = Timer.IntTick;
         }
 
         private void CheckPoints()
@@ -135,7 +135,7 @@ public class TrappedPerson : MonoBehaviour
     public void StartRescue()
     {
         isGettingRescue = true;
-        rescueTimeStart = timer.IntTick;
+        rescueTimeStart = Timer.IntTick;
     }
 
     public void BreakRescue()
@@ -148,17 +148,12 @@ public class TrappedPerson : MonoBehaviour
     {
         if (isGettingRescue)
         {
-            rescueTime = timer.IntTick - rescueTimeStart;
+            rescueTime = Timer.IntTick - rescueTimeStart;
         }
     }
     
     #endregion
     
-    private void Awake()
-    {
-        timer = GameObject.Find("LevelManager").GetComponent<Timer>();
-    }
-
     private void Start()
     {
         GetStartTime();
