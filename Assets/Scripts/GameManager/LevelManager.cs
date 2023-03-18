@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TriageTags;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GameManager
 {
@@ -11,15 +12,13 @@ namespace GameManager
         
         private Counter counter;
         private Timer timer;
-        //private Rescue rescue;
-        public NovelRescue novelRescue;
+        [FormerlySerializedAs("novelRescue")] public NovelRescue rescue;
 
         private void Start()
         {
             timer = GetComponent<Timer>();
             counter = GetComponent<Counter>();
-            //rescue = new Rescue();
-            novelRescue = new NovelRescue();
+            rescue = new NovelRescue();
         }
 
         private void Update()
@@ -37,44 +36,35 @@ namespace GameManager
                 {
                     person.status = PersonStatus.Died;
                     counter.AddDiedPerson(person);
-                    // if (rescue.Find(person))
-                    // {
-                    //     rescue.Remove(person);
-                    // }
-                    novelRescue.Remove(person);
+                    rescue.Remove(person);
                     // TODO: how does ui deal with a person's death?
-                    // Debug.Log("person " + person.name + " died");
                 }
             }
 
-            foreach (var person in novelRescue.rescuing)
+            foreach (var person in rescue.rescuing)
             {
                 if (person.rescueTime >= TrappedPerson.TimeToRescue)
                 {
                     person.status = PersonStatus.Saved;
                     counter.AddSavedPerson(person);
-                    //Debug.Log("person " + person.name + " saved");
                 }
             }
         }
 
         private void FreshRescueList()
         {
-            if (novelRescue.rescuing.Count < NovelRescue.RescuingLimit)
+            if (rescue.rescuing.Count < NovelRescue.RescuingLimit)
             {
-                novelRescue.ShiftUp();
+                rescue.ShiftUp();
             }
         }
 
         public void AddRescue(TrappedPerson person, TriageTag triageTag)
         {
-            // rescue.Insert(person, priority);
-            
             // todo: deal with black tag
             if (person.triageTag == triageTag || person.triageTag == TriageTags.TriageTags.Black) return;
             
-            novelRescue.Insert(person, triageTag);
-
+            rescue.Insert(person, triageTag);
         }
     }
 }

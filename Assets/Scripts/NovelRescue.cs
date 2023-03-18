@@ -45,15 +45,6 @@ public class NovelRescue
                     rescuing.Remove(person);
                     InnerInsert(person, TriageTags.TriageTags.Red);
                 }
-                // else
-                // {
-                //     if (CountBeforeInsert(triageTag) != 0)
-                //     {
-                //         rescuing.Remove(person);
-                //         person.BreakRescue();
-                //         InnerInsert(person, triageTag);
-                //     }
-                // }
             }
         }
 
