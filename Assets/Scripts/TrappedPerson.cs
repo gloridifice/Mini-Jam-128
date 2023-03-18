@@ -67,7 +67,7 @@ public class TrappedPerson : MonoBehaviour
             startTime = Timer.IntTick;
         }
 
-        private void CheckPoints()
+        private void CheckInspectingStatus()
         {
             if (isGettingInfo)
             {
@@ -163,7 +163,7 @@ public class TrappedPerson : MonoBehaviour
 
     private void Update()
     {
-        CheckPoints();
+        CheckInspectingStatus();
         GetRescue();
     }
     
