@@ -40,7 +40,7 @@ public class TrappedPerson : MonoBehaviour
     public MeasureStage RespiratoryRate => Heartbeat;
 
     public TriageTag triageTag = TriageTags.TriageTags.None;
-    public PersonStatus status;
+    public PersonStatus status = PersonStatus.Waiting;
 
     private Timer Timer => LevelManager.Instance.Timer;
 
@@ -126,12 +126,11 @@ public class TrappedPerson : MonoBehaviour
 
     #region GetRescue
 
-    public const int TimeToRescue = 10;// TODO: decide this variable
-    [HideInInspector]public int rescueTime;
+    public const int TimeToRescue = 10;
+    [HideInInspector] public int rescueTime;
     private int rescueTimeStart;
     private bool isGettingRescue;
-    public bool IsGettingRescue => isGettingRescue;
-    
+
     public void StartRescue()
     {
         isGettingRescue = true;
@@ -166,12 +165,8 @@ public class TrappedPerson : MonoBehaviour
     {
         CheckPoints();
         GetRescue();
-
-        //hb = Heartbeat;
     }
     
-    // todo: how do a person get saved
-
     // todo: add more model
     private MeasureStage GetHeartbeat(float leftTime)
     {

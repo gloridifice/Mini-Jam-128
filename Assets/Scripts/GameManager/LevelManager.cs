@@ -51,8 +51,6 @@ namespace GameManager
         private Timer timer;
         [FormerlySerializedAs("novelRescue")] public NovelRescue rescue;
         public Timer Timer => this.LazyGetComponent(timer);
-
-
         private CameraController cameraController;
         public CameraController CameraController
         {
