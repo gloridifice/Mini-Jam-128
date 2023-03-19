@@ -44,5 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  status: 0
+  timeOffset: 0
+  severity: 300
+  personName: 
+  age:
+    age: 0
+  subtitleTag: 0
+  rescueTime: 0
