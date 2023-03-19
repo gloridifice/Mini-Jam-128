@@ -54,7 +54,6 @@ public class NovelRescue
         }
 
         person.TriageTag = triageTag;
-        // todo: invoke an event to tell ui that we have changed a tag
     }
 
     public void ShiftUp()
@@ -102,7 +101,6 @@ public class NovelRescue
 
         if (triageTag == TriageTags.TriageTags.Red)
         {
-            // todo: deal with red tag
             rescuing.Insert(0, person);
             person.StartRescue();
             Reordering();
