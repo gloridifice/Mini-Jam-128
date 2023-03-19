@@ -24,6 +24,9 @@ public class NovelRescue
     
     public void Insert(TrappedPerson person, TriageTag triageTag)
     {
+        // if the person was marked black, we should do nothing
+        if (person.TriageTag == TriageTags.TriageTags.Black) return;
+        
         // 1. if this is a first enqueue
         if (person.TriageTag == TriageTags.TriageTags.None)
         {

@@ -136,6 +136,7 @@ namespace GameManager
         public void MakeTag(TrappedPerson person, TriageTag triageTag)
         {
             // todo: deal with black tag
+            // now Insert method will do nothing when person was marked black already
             if (person.TriageTag == triageTag) return;
             
             rescue.Insert(person, triageTag);
