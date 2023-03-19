@@ -36,18 +36,27 @@ public enum SubtitleTag
     PregnantWoman,
 }
 
+public enum Severity
+{
+    Low = 390,
+    Mid = 300,
+    High = 240,
+}
+
 /// <summary>
 /// <para>Class of trapped person.</para>
 /// </summary>
 public class TrappedPerson : MonoBehaviour
 {
-    public int time;
-    public int TimeRemain => time - Timer.IntTick;
+    public int Time => (int)severity - timeOffset;
+    public int timeOffset;
+    public int TimeRemain => Time - Timer.IntTick;
+    public Severity severity;
 
     public string personName;
     public Age age;
-    public MeasureStage Heartbeat => GetHeartbeat(time - Timer.IntTick);
-    public uint BPM => GetBPM(time - Timer.IntTick);
+    public MeasureStage Heartbeat => GetHeartbeat(TimeRemain, severity);
+    public uint BPM => GetBPM(TimeRemain, severity);
     public MeasureStage RespiratoryRate => Heartbeat;
     public int InjurySeverity => GetInjurySeverity();
 
@@ -155,9 +164,6 @@ public class TrappedPerson : MonoBehaviour
     private void Start()
     {
         GetStartTime();
-        // ShowVoice += EShowVoice;
-        // ShowHeartbeat += EShowHeartbeat;
-        // ShowFullInfo += EShowFullInfo;
     }
 
     private void Update()
@@ -165,11 +171,10 @@ public class TrappedPerson : MonoBehaviour
         CheckInspectingStatus();
         GetRescue();
     }
-
-    // todo: add more model
-    private MeasureStage GetHeartbeat(int leftTime)
+    
+    private MeasureStage GetHeartbeat(int leftTime, Severity s)
     {
-        var exactBPM = GetBPM(leftTime);
+        var exactBPM = GetBPM(leftTime, severity);
         // Debug.Log(exactBPM);
         return exactBPM switch
         {
@@ -182,14 +187,49 @@ public class TrappedPerson : MonoBehaviour
         };
     }
 
-    private uint GetBPM(int t)
+    private uint GetBPM(int t, Severity s)
+    {
+        return s switch
+        {
+            Severity.Low => LowSeverityBPM(t),
+            Severity.Mid => MidSeverityBPM(t),
+            Severity.High => HighSeverityBPM(t),
+            _ => throw new ArgumentOutOfRangeException(nameof(severity), severity, null)
+        };
+    }
+
+    private uint LowSeverityBPM(int t)
     {
         return t switch
         {
-            (>= 0) and (< 40) => (uint)Random.Range(60, 80),
+            (>= 0) and (< 60) => (uint)Random.Range(30, 40),
+            (>= 60) and (< 150) => (uint)Random.Range(120, 130),
+            (>= 150) and (< 270) => (uint)Random.Range(80, 110),
+            (>= 270) and (< 390) => (uint)Random.Range(60, 65),
+            _ => 0,
+        };
+    }
+    
+    private uint MidSeverityBPM(int t)
+    {
+        return t switch
+        {
+            (>= 0) and (< 40) => (uint)Random.Range(30, 40),
             (>= 40) and (< 120) => (uint)Random.Range(120, 140),
             (>= 120) and (< 220) => (uint)Random.Range(100, 120),
             (>= 220) and (< 300) => (uint)Random.Range(60, 80),
+            _ => 0,
+        };
+    }
+    
+    private uint HighSeverityBPM(int t)
+    {
+        return t switch
+        {
+            (>= 0) and (< 60) => (uint)Random.Range(130, 150),
+            (>= 60) and (< 90) => (uint)Random.Range(60, 120),
+            (>= 90) and (< 180) => (uint)Random.Range(120, 130),
+            (>= 180) and (< 240) => (uint)Random.Range(80, 100),
             _ => 0,
         };
     }
