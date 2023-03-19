@@ -32,7 +32,8 @@ public enum MeasureStage
 public enum SubtitleTag
 {
     General,
-    Test,
+    Child,
+    PregnantWoman,
 }
 
 /// <summary>

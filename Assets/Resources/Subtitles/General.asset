@@ -14,11 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subtitleTag: 0
   high:
-  - 123
+  - ......No sound
+  - Panting sound
+  - Heavy breathing
+  - '"Can''t...Keep up..."'
   mid:
-  - 123
-  - 123
+  - Groaning sound
+  - Coughing sound
+  - Yelling sound
+  - '"My leg!"'
+  - "\u201CMy arm!\u201D"
   low:
-  - 123
-  - 123
-  - 123
+  - "\u201CHelp!\u201D"
+  - Knocking sound
+  - Crying sound
+  - '"Ahh~~~"'
+  - Bandaging sound
+  - '"Can''t take it..."'
+  - '"Anyone hear me?"'
+  - '"I''m here!"'
+  - '"Come here..."'
