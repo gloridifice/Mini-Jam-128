@@ -45,13 +45,11 @@ public class TrappedPerson : MonoBehaviour
     public int TimeRemain => time - Timer.IntTick;
 
     public string personName;
-    
     public Age age;
     public MeasureStage Heartbeat => GetHeartbeat(time - Timer.IntTick);
     public uint BPM => GetBPM(time - Timer.IntTick);
     public MeasureStage RespiratoryRate => Heartbeat;
     public int InjurySeverity => GetInjurySeverity();
-    public string Subtitle => GetSubtitle();
 
     public SubtitleTag subtitleTag;
     private TriageTag triageTag = TriageTags.TriageTags.None;
@@ -241,12 +239,5 @@ public class TrappedPerson : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(heartbeat), heartbeat, null);
         }
-    }
-    
-    private string GetSubtitle()
-    {
-        //if the tag is "general", choose from general pool
-        //otherwise, choose from general pool and tag-related pool
-        return "";
     }
 }

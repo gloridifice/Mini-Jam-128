@@ -57,7 +57,6 @@ public class SubtitlesPool : MonoBehaviour
         midPool = new Dictionary<SubtitleTag, List<string>>();
         lowPool = new Dictionary<SubtitleTag, List<string>>();
         LoadSubtitles();
-        Test();
     }
 
     private int GetRandomIndex(int limit)
@@ -74,14 +73,5 @@ public class SubtitlesPool : MonoBehaviour
             midPool.Add(subtitle.subtitleTag, subtitle.mid);
             lowPool.Add(subtitle.subtitleTag, subtitle.low);
         }
-        /*Debug.Log(highPool[SubtitleTag.Test].Count);
-        Assert.AreEqual(1, highPool[SubtitleTag.General].Count);
-        Assert.AreEqual(2, midPool[SubtitleTag.General].Count);
-        Assert.AreEqual(1, lowPool[SubtitleTag.General].Count);*/
-    }
-
-    private void Test()
-    {
-        
     }
 }
