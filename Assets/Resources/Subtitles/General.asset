@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: General
   m_EditorClassIdentifier: 
   subtitleTag: 0
-  strings:
-  - Test1
-  - Test2
-  - Test3
-  - Test4
+  high:
+  - 123
+  mid:
+  - 123
+  - 123
+  low:
+  - 123
+  - 123
+  - 123

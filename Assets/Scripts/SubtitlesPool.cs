@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
 
 public class SubtitlesPool : MonoBehaviour
@@ -9,6 +10,7 @@ public class SubtitlesPool : MonoBehaviour
     public Dictionary<SubtitleTag, List<string>> highPool;
     public Dictionary<SubtitleTag, List<string>> midPool;
     public Dictionary<SubtitleTag, List<string>> lowPool;
+    private Subtitle[] subtitles;
 
     public string GetSubtitle(SubtitleTag subtitleTag, int injurySeverity)
     {
@@ -24,7 +26,7 @@ public class SubtitlesPool : MonoBehaviour
         return InnerGetSubtitle(context, subtitleTag);
     }
 
-    private string InnerGetSubtitle(Dictionary<SubtitleTag,List<string>> context, SubtitleTag subtitleTag)
+    private string InnerGetSubtitle(Dictionary<SubtitleTag, List<string>> context, SubtitleTag subtitleTag)
     {
         var general = context[SubtitleTag.General];
         var totalCount = general.Count;
@@ -49,8 +51,37 @@ public class SubtitlesPool : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        highPool = new Dictionary<SubtitleTag, List<string>>();
+        midPool = new Dictionary<SubtitleTag, List<string>>();
+        lowPool = new Dictionary<SubtitleTag, List<string>>();
+        LoadSubtitles();
+        Test();
+    }
+
     private int GetRandomIndex(int limit)
     {
         return Random.Range(0, limit);
+    }
+
+    private void LoadSubtitles()
+    {
+        subtitles = Resources.LoadAll<Subtitle>("");
+        foreach (var subtitle in subtitles) 
+        {
+            highPool.Add(subtitle.subtitleTag, subtitle.high);
+            midPool.Add(subtitle.subtitleTag, subtitle.mid);
+            lowPool.Add(subtitle.subtitleTag, subtitle.low);
+        }
+        /*Debug.Log(highPool[SubtitleTag.Test].Count);
+        Assert.AreEqual(1, highPool[SubtitleTag.General].Count);
+        Assert.AreEqual(2, midPool[SubtitleTag.General].Count);
+        Assert.AreEqual(1, lowPool[SubtitleTag.General].Count);*/
+    }
+
+    private void Test()
+    {
+        
     }
 }
