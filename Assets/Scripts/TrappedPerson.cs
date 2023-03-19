@@ -45,7 +45,6 @@ public class TrappedPerson : MonoBehaviour
     public int TimeRemain => time - Timer.IntTick;
 
     public string personName;
-    
     public Age age;
     public MeasureStage Heartbeat => GetHeartbeat(time - Timer.IntTick);
     public uint BPM => GetBPM(time - Timer.IntTick);
