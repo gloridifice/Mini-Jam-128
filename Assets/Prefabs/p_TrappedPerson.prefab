@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5293812769212220521}
   - component: {fileID: 834082762424337001}
   m_Layer: 0
-  m_Name: TrappedPerson
+  m_Name: p_TrappedPerson
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
