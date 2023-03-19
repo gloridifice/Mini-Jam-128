@@ -22,6 +22,7 @@ namespace GameManager
         public WorldRangeBox rangeBox;
         public LevelUIManager levelUIManager;
         public Transform trappedPersonParent;
+        public SubtitlesPool subtitlesPool;
 
         #endregion
 
