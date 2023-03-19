@@ -29,6 +29,12 @@ public enum MeasureStage
     Zero,
 }
 
+public enum SubtitleTag
+{
+    General,
+    Test,
+}
+
 /// <summary>
 /// <para>Class of trapped person.</para>
 /// </summary>
@@ -42,7 +48,9 @@ public class TrappedPerson : MonoBehaviour
     public uint BPM => GetBPM(time - Timer.IntTick);
     public MeasureStage RespiratoryRate => Heartbeat;
     public int InjurySeverity => GetInjurySeverity();
-    
+    public string Subtitle => GetSubtitle();
+
+    public SubtitleTag subtitleTag;
     private TriageTag triageTag = TriageTags.TriageTags.None;
 
     public TriageTag TriageTag
@@ -230,5 +238,12 @@ public class TrappedPerson : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(heartbeat), heartbeat, null);
         }
+    }
+    
+    private string GetSubtitle()
+    {
+        //if the tag is "general", choose from general pool
+        //otherwise, choose from general pool and tag-related pool
+        return "";
     }
 }
