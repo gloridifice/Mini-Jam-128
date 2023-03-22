@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameManager;
+using TMPro;
 using TriageTags;
+using UI.Viewport;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -41,7 +45,7 @@ public class TrappedPerson : MonoBehaviour
     public uint BPM => GetBPM(time - Timer.Tick);
     public MeasureStage RespiratoryRate => Heartbeat;
     public int InjurySeverity => GetInjurySeverity();
-    
+
     private TriageTag triageTag = TriageTags.TriageTags.None;
 
     public TriageTag TriageTag
@@ -49,101 +53,144 @@ public class TrappedPerson : MonoBehaviour
         get => triageTag;
         set
         {
-            OnTrappedPersonTagChanged?.Invoke(triageTag, value);
+            if (value != triageTag)
+            {
+                onTagChanged?.Invoke(this, triageTag, value);
+            }
+
             triageTag = value;
         }
     }
+
     private PersonStatus status = PersonStatus.Waiting;
+
     public PersonStatus Status
     {
         get => status;
         set
         {
-            OnPersonStatusChanged.Invoke(status, value);
+            if (status != value)
+            {
+                onStatusChanged.Invoke(this, status, value);
+            }
+
             status = value;
         }
     }
 
-    public event Action<TriageTag, TriageTag> OnTrappedPersonTagChanged = (triageTag, tag1) => { };
+    [HideInInspector] public UnityEvent<TrappedPerson, TriageTag, TriageTag> onTagChanged;
+    [HideInInspector] public UnityEvent<TrappedPerson, PersonStatus, PersonStatus> onStatusChanged;
+    [HideInInspector] public FloatEvent onScanningProgressChanged;
+    [HideInInspector] public FloatEvent onRescueProgressChanged;
+    [HideInInspector] public FloatEvent onHeartBeatChanged;
+    [HideInInspector] public UnityEvent onSoundUnlock;
+    [HideInInspector] public UnityEvent onHealthUnlock;
+    [HideInInspector] public UnityEvent onLifeUnlock;
+    [HideInInspector] public UnityEvent onGetRescue;
 
-    public event Action<PersonStatus, PersonStatus> OnPersonStatusChanged = (status, arg3) => { };
+    public ViewportTrappedPerson viewportPerson;
 
     private Timer Timer => LevelManager.Instance.Timer;
 
-    #region InfoGetting
+    #region Scanning
 
-    private bool isGettingInfo; // TODO: impl change between true and false
-    private int startTime;
-    private int accumulatedTime;
-    private int currentTime;
-    private const int TimeToGetVoice = 3;
-    private const int TimeToGetHeartbeat = 6;
-    private const int TimeToGetFullInfo = 9;
+    public class ScanningInfo
+    {
+        public bool isUnlock;
+        public float unlockTime;
+        public float rate;
+
+        public ScanningInfo(float unlockTime, float fullTime)
+        {
+            this.unlockTime = unlockTime;
+            this.rate = unlockTime / fullTime;
+        }
+    }
+
+    [HideInInspector] public bool isGettingInfo;
+    public bool ShouldShowScanning => scanningCurrentTime > 0;
+    private float scanningStartTime;
+    private float scanningAccumulatedTime;
+    private float scanningCurrentTime;
+    private const float FullScanTime = 9;
+    public ScanningInfo soundScanningInfo = new(3, FullScanTime);
+    public ScanningInfo healthScanningInfo = new(6, FullScanTime);
+    public ScanningInfo lifeScanningInfo = new(9, FullScanTime);
     private event EventHandler ShowVoice;
     private event EventHandler ShowHeartbeat;
     private event EventHandler ShowFullInfo;
+    private bool scanned;
 
-    private int TimeAccumulation()
+    private float TimeAccumulation()
     {
-        return Timer.IntTick - startTime;
+        return Timer.Tick - scanningStartTime;
     }
 
-    private void GetStartTime()
+    private void RefreshStartTime()
     {
-        startTime = Timer.IntTick;
+        scanningStartTime = Timer.Tick;
     }
 
-    private void CheckInspectingStatus()
+    private bool isScanningProgressClear = false;
+    public float ScanningRate => Mathf.Clamp(scanningCurrentTime / FullScanTime, 0f, 1f);
+
+    private void ScanningUpdate()
     {
+        if (scanned) return;
         if (isGettingInfo)
         {
-            currentTime = accumulatedTime + TimeAccumulation();
-            if (currentTime > TimeToGetVoice)
+            isScanningProgressClear = false;
+            scanningCurrentTime = scanningAccumulatedTime + TimeAccumulation();
+            if (scanningCurrentTime > soundScanningInfo.unlockTime)
             {
                 ShowVoice?.Invoke(this, EventArgs.Empty);
             }
 
-            if (currentTime > TimeToGetHeartbeat)
+            if (scanningCurrentTime > healthScanningInfo.unlockTime)
             {
                 ShowHeartbeat?.Invoke(this, EventArgs.Empty);
             }
 
-            if (currentTime > TimeToGetFullInfo)
+            if (scanningCurrentTime > lifeScanningInfo.unlockTime)
             {
                 ShowFullInfo?.Invoke(this, EventArgs.Empty);
             }
+
+            onScanningProgressChanged.Invoke(ScanningRate);
         }
         else
         {
-            accumulatedTime = currentTime switch
+            RefreshStartTime();
+            if (!isScanningProgressClear)
             {
-                (< TimeToGetVoice) => 0,
-                (>= TimeToGetVoice) and (< TimeToGetHeartbeat) => TimeToGetVoice,
-                (>= TimeToGetHeartbeat) and (< TimeToGetFullInfo) => TimeToGetHeartbeat,
-                (>= TimeToGetFullInfo) => TimeToGetFullInfo,
-            };
-            GetStartTime();
+                if (soundScanningInfo.isUnlock) scanningAccumulatedTime = soundScanningInfo.unlockTime;
+                if (healthScanningInfo.isUnlock) scanningAccumulatedTime = healthScanningInfo.unlockTime;
+                scanningCurrentTime = scanningAccumulatedTime;
+                onScanningProgressChanged.Invoke(ScanningRate);
+                isScanningProgressClear = true;
+            }
         }
     }
 
     private void EShowVoice(System.Object sender, EventArgs args)
     {
-        // TODO: impl needed;
-        //Debug.Log("voice");
+        soundScanningInfo.isUnlock = true;
+        onSoundUnlock.Invoke();
         ShowVoice -= EShowVoice; // remove this if u want to call every frame
     }
 
     private void EShowHeartbeat(System.Object sender, EventArgs args)
     {
-        // TODO: impl needed;
-        //Debug.Log("heartbeat");
+        healthScanningInfo.isUnlock = true;
+        onHealthUnlock.Invoke();
         ShowHeartbeat -= EShowHeartbeat; // remove this if u want to call every frame
     }
 
     private void EShowFullInfo(System.Object sender, EventArgs args)
     {
-        // TODO: impl needed;
-        //Debug.Log("fullInfo");
+        lifeScanningInfo.isUnlock = true;
+        onLifeUnlock.Invoke();
+        scanned = true;
         ShowFullInfo -= EShowFullInfo; // remove this if u want to call every frame
     }
 
@@ -152,15 +199,16 @@ public class TrappedPerson : MonoBehaviour
 
     #region GetRescue
 
-    public const int TimeToRescue = 10;
-    [HideInInspector] public int rescueTime;
-    private int rescueTimeStart;
+    public const float TimeToRescue = 10;
+    [HideInInspector] public float rescueTime;
+    public bool ShouldShowRescueBar => rescueTime > 0 && PersonStatus.Waiting == Status;
+    private float rescueTimeStart;
     private bool isGettingRescue;
 
     public void StartRescue()
     {
         isGettingRescue = true;
-        rescueTimeStart = Timer.IntTick;
+        rescueTimeStart = Timer.Tick;
     }
 
     public void BreakRescue()
@@ -169,28 +217,58 @@ public class TrappedPerson : MonoBehaviour
         rescueTime = 0;
     }
 
-    public void GetRescue()
+    public void RescueUpdate()
     {
         if (isGettingRescue)
         {
-            rescueTime = Timer.IntTick - rescueTimeStart;
+            rescueTime = Timer.Tick - rescueTimeStart;
+            if (rescueTime > TimeToRescue) onGetRescue.Invoke();
+            onRescueProgressChanged.Invoke(rescueTime / TimeToRescue);
         }
     }
 
     #endregion
 
+
     private void Start()
     {
-        GetStartTime();
+        RefreshStartTime();
         ShowVoice += EShowVoice;
         ShowHeartbeat += EShowHeartbeat;
         ShowFullInfo += EShowFullInfo;
+        LevelManager.Instance.CameraController.OnCameraMoved += OnCameraMoved;
     }
+
+    [HideInInspector] public UnityEvent<TrappedPerson> onBeFound;
+    [HideInInspector] public bool isFound;
 
     private void Update()
     {
-        CheckInspectingStatus();
-        GetRescue();
+        ScanningUpdate();
+        RescueUpdate();
+    }
+
+    void OnCameraMoved(CameraController controller)
+    {
+        CheckBeFound(controller);
+    }
+
+    void CheckBeFound(CameraController controller)
+    {
+        if (!isFound)
+        {
+            Vector2 pos = transform.position.XZ();
+            Vector2 center = controller.Center;
+            Vector2 size = controller.worldSpaceSize;
+
+            Vector2 point = center - size / 2;
+            Vector2 sub = pos - point;
+            if (sub.x < size.x && sub.x > 0 && sub.y < size.y && sub.y > 0)
+            {
+                isFound = true;
+                onBeFound.Invoke(this);
+            }
+        }
     }
 
     // todo: add more model

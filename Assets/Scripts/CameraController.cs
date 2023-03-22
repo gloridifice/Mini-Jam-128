@@ -2,7 +2,9 @@ using System;
 using GameManager;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Camera))]
@@ -14,12 +16,14 @@ public class CameraController : MonoBehaviour
 
     //四个角落位置相对于相机的位置
     [HideInInspector] public Vector2 topLeft, topRight, bottomRight, bottomLeft;
+    [HideInInspector] public Vector2 worldSpaceSize;
     private Vector2 center;
     public Vector2 Center => center + transform.position.XZ();
 
     #region EventAPI
 
     public event Action<CameraController> OnCameraMoved = controller => { };
+    [HideInInspector] public UnityEvent<TrappedPerson> onFindTrappedPerson;
 
     #endregion
 
@@ -36,6 +40,7 @@ public class CameraController : MonoBehaviour
         topRight = GetCornerPos(ray1);
         bottomRight = GetCornerPos(ray2);
         bottomLeft = GetCornerPos(ray3);
+        worldSpaceSize = new Vector2(topRight.x - topLeft.x, topRight.y - bottomRight.y);
 
         center = (topLeft + topRight + bottomLeft + bottomRight) / 4;
 

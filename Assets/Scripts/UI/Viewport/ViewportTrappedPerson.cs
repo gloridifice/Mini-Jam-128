@@ -1,57 +1,119 @@
 using System;
 using System.Diagnostics;
+using DG.Tweening;
 using GameInput;
 using GameManager;
 using TriageTags;
+using UI.Viewport.PersonInfoBar;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace UI.Viewport
 {
-    public class ViewportTrappedPerson : UIBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class ViewportTrappedPerson : ViewportElementBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        #region Editor Inspector
+
         public Image image;
-        public TrappedPerson person;
-        public bool isMouseOver;
+        public FadeTwnUIBehaviour crossIcon;
+        public GameObject tagSelectorPrefab;
+
+        [Header("Animation")] [Range(0, 2)] public float duration;
+        [Range(0, 2)] public float scale;
+        public Ease animEase;
+
+        #endregion
+
+        [HideInInspector] public TrappedPerson person;
+        [HideInInspector] public bool isMouseOver;
+        private CanvasGroup canvasGroup;
+        public CanvasGroup CanvasGroup => this.LazyGetComponent(canvasGroup);
+
+        private Tweener mouseHoverTwn;
+        public Tweener MouserHoverTwn
+        {
+            get
+            {
+                if (mouseHoverTwn == null)
+                {
+                    mouseHoverTwn = Rect.DOScale(Vector3.one * scale, duration);
+                    mouseHoverTwn.SetEase(animEase);
+                    mouseHoverTwn.SetAutoKill(false);
+                }
+
+                return mouseHoverTwn;
+            }
+        }
+
+        public bool CanInteractWith => person.Status != PersonStatus.Died;
+
+        [HideInInspector] public UnityEvent<Vector2> onElementMoved;
 
         public void Init(TrappedPerson person)
         {
             this.person = person;
+            base.Init(CalculatePos());
+            this.person.viewportPerson = this;
 
             FreshPosition();
-            person.OnTrappedPersonTagChanged += OnTagChanged;
-            person.OnPersonStatusChanged += OnStatusChanged;
             LevelManager.Instance.CameraController.OnCameraMoved += OnCameraMoved;
+
+            person.onTagChanged.AddListener(OnTagChanged);
+            person.onStatusChanged.AddListener(OnStatusChanged);
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
             if (isMouseOver)
             {
                 if (Input.GetKeyDown(KeyCode.H)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Red);
                 if (Input.GetKeyDown(KeyCode.J)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Yellow);
                 if (Input.GetKeyDown(KeyCode.K)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Green);
                 if (Input.GetKeyDown(KeyCode.L)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Black);
+
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    GameObject selectorObj = GameObject.Instantiate(tagSelectorPrefab, Rect.parent);
+                    if (selectorObj.TryGetComponent(out TagSelector.TagSelector selector))
+                    {
+                        selector.Init(person, Rect.anchoredPosition);
+                    }
+                }
+
+                person.isGettingInfo = Input.GetKey(KeyCode.Mouse1);
             }
         }
 
-        void OnTagChanged(TriageTag preTag, TriageTag newTag)
+        void OnTagChanged(TrappedPerson person, TriageTag preTag, TriageTag newTag)
         {
             image.color = newTag.color;
         }
 
-        void OnStatusChanged(PersonStatus preStatus, PersonStatus newStatus)
+        void OnStatusChanged(TrappedPerson person, PersonStatus preStatus, PersonStatus newStatus)
         {
             if (newStatus == PersonStatus.Saved)
             {
-                gameObject.SetActive(false);
+                OnSaved();
             }
 
             if (newStatus == PersonStatus.Died)
             {
                 image.color = Color.black;
+                crossIcon.ForceAppear();
+                CanvasGroup.DOFade(0.75f, 0.6f);
             }
+        }
+
+        void OnSaved()
+        {
+            Tweener twn0 = CanvasGroup.DOFade(0, 0.6f);
+            Tweener twn1 = transform.DOScale(1.3f, 0.6f);
+
+            twn1.SetEase(Ease.InQuart);
         }
 
         void OnCameraMoved(CameraController controller)
@@ -61,23 +123,68 @@ namespace UI.Viewport
 
         void FreshPosition()
         {
+            targetPos = CalculatePos();
+            onElementMoved.Invoke(targetPos);
+        }
+
+        Vector2 CalculatePos()
+        {
             RectTransform parent = Rect.parent as RectTransform;
             Vector3 scPos = Camera.main.WorldToScreenPoint(person.transform.position);
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, scPos, Camera.main,
                     out Vector2 localPoint))
             {
-                Rect.anchoredPosition = localPoint;
+                return localPoint;
             }
+
+            return Vector2.zero;
         }
+
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!CanInteractWith)return;
             isMouseOver = true;
+            MouserHoverTwn.PlayForward();
+            ShowInfo();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (!isMouseOver) return;
             isMouseOver = false;
+            MouserHoverTwn.PlayBackwards();
+            person.isGettingInfo = false;
+            CloseInfo();
+        }
+
+        public GameObject infoBarPrefab;
+        private PersonalInfoBar infoBar;
+
+        private void ShowInfo()
+        {
+            if (infoBar == null)
+            {
+                GameObject obj = GameObject.Instantiate(infoBarPrefab, transform.parent);
+                if (obj.TryGetComponent(out PersonalInfoBar bar))
+                {
+                    infoBar = bar;
+                    infoBar.Init(person);
+                    bar.Rect.anchoredPosition = Rect.anchoredPosition + 100 * Vector2.right;
+                }
+            }
+            else
+            {
+                infoBar.Display();
+            }
+        }
+
+        private void CloseInfo()
+        {
+            if (infoBar != null)
+            {
+                infoBar.Hide();
+            }
         }
     }
 }
