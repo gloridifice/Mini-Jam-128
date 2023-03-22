@@ -1,5 +1,6 @@
 using System;
 using GameManager;
+using UI.Minimap;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -20,12 +21,16 @@ public class CameraController : MonoBehaviour
     private Vector2 center;
     public Vector2 Center => center + transform.position.XZ();
 
-    #region EventAPI
+    #region Events
 
     public event Action<CameraController> OnCameraMoved = controller => { };
     [HideInInspector] public UnityEvent<TrappedPerson> onFindTrappedPerson;
 
     #endregion
+
+    private Vector2 halfRangeSize;
+    private Vector2 clampTopRight;
+    private Vector2 clampBottomLeft;
 
     private void Awake()
     {
@@ -41,6 +46,10 @@ public class CameraController : MonoBehaviour
         bottomRight = GetCornerPos(ray2);
         bottomLeft = GetCornerPos(ray3);
         worldSpaceSize = new Vector2(topRight.x - topLeft.x, topRight.y - bottomRight.y);
+        WorldRangeBox rangeBox = LevelManager.rangeBox;
+        halfRangeSize = new Vector2(rangeBox.XSize / 2, rangeBox.ZSize / 2);
+        clampTopRight = rangeBox.Center.XZ() + halfRangeSize - worldSpaceSize / 2 - ((rangeBox.ZSize - worldSpaceSize.y / 2) * Vector2.up);
+        clampBottomLeft = rangeBox.Center.XZ() - halfRangeSize + worldSpaceSize / 2 - (rangeBox.ZSize - worldSpaceSize.y / 2) * Vector2.up;
 
         center = (topLeft + topRight + bottomLeft + bottomRight) / 4;
 
@@ -83,7 +92,15 @@ public class CameraController : MonoBehaviour
         if (move != Vector2.zero)
         {
             move *= moveVelocity * (Time.deltaTime * 50f);
-            targetPos += move.XYZ();
+            Vector3 newPos = targetPos + move.XYZ();
+            //<clamp>
+            float x = Mathf.Clamp(newPos.x, clampBottomLeft.x, clampTopRight.x);
+            float z = Mathf.Clamp(newPos.z, clampBottomLeft.y, clampTopRight.y);
+            newPos.x = x;
+            newPos.z = z;
+            //</clamp>
+            targetPos = newPos;
+
             isMoving = true;
         }
 
