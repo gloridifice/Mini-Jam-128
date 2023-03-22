@@ -38,7 +38,7 @@ namespace UI.Viewport.PersonInfoBar
             person.onSoundUnlock.AddListener(onSoundUnlock.Invoke);
             person.onHealthUnlock.AddListener(onHealthUnlock.Invoke);
             person.onLifeUnlock.AddListener(onLifeUnlock.Invoke);
-            person.onGetRescue.AddListener(Die);
+            person.onStatusChanged.AddListener(OnPersonStatusChanged);
             person.viewportPerson.onElementMoved.AddListener(OnMove);
             OnMove(person.viewportPerson.Rect.anchoredPosition);
             
@@ -73,9 +73,16 @@ namespace UI.Viewport.PersonInfoBar
             heartBeatPanel.Active();
         }
 
+        void OnPersonStatusChanged(TrappedPerson person, PersonStatus preStatus, PersonStatus newStatus)
+        {
+            if (newStatus == PersonStatus.Saved || newStatus == PersonStatus.Died)
+            {
+                Die();
+            }
+        }
         public void Die()
         {
-            DestroyImmediate(gameObject);
+            this.ForceDisappearToDestroy();
         }
         private void Update()
         {

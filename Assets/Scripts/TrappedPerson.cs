@@ -86,7 +86,6 @@ public class TrappedPerson : MonoBehaviour
     [HideInInspector] public UnityEvent onSoundUnlock;
     [HideInInspector] public UnityEvent onHealthUnlock;
     [HideInInspector] public UnityEvent onLifeUnlock;
-    [HideInInspector] public UnityEvent onGetRescue;
 
     public ViewportTrappedPerson viewportPerson;
 
@@ -222,7 +221,6 @@ public class TrappedPerson : MonoBehaviour
         if (isGettingRescue)
         {
             rescueTime = Timer.Tick - rescueTimeStart;
-            if (rescueTime > TimeToRescue) onGetRescue.Invoke();
             onRescueProgressChanged.Invoke(rescueTime / TimeToRescue);
         }
     }

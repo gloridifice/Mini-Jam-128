@@ -46,6 +46,7 @@ namespace UI
         {
             isActive = true;
         }
+
         public virtual void ForceAppear()
         {
             shouldAppear = true;
@@ -64,6 +65,12 @@ namespace UI
             isActive = false;
             shouldAppear = false;
             AppearTwn.PlayBackwards();
+        }
+
+        public virtual void ForceDisappearToDestroy()
+        {
+            ForceDisappear();
+            AppearTwn.onComplete += () => { Destroy(this); };
         }
     }
 }

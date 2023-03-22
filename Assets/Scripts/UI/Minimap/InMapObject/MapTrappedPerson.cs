@@ -21,7 +21,6 @@ namespace UI.Minimap
             trappedPerson = person;
             Init(MinimapUtils.WorldPositionToMapPosition(MinimapManager.Instance.RangeBox, person.transform.position));
             
-            person.onGetRescue.AddListener(OnGetRescue);
             person.onTagChanged.AddListener(OnTagChanged);
             person.onStatusChanged.AddListener(OnStatusChanged);
 
@@ -41,6 +40,10 @@ namespace UI.Minimap
 
         void OnStatusChanged(TrappedPerson person, PersonStatus preStatus, PersonStatus newStatus)
         {
+            if (newStatus == PersonStatus.Saved)
+            {
+                OnGetRescue();
+            }
             if (newStatus == PersonStatus.Died)
             {
                 colorDot.color = Color.black;
