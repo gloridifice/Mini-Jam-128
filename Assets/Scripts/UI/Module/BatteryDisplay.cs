@@ -20,7 +20,7 @@ namespace UI.Module
         /// <param name="value">range: 0f ~ 1f</param>
         public void SetBattery(float value)
         {
-            percentageText.text = value + "%";
+            percentageText.text = Mathf.RoundToInt(value * 100) + "%";
 
             int count = Mathf.CeilToInt(value * batteryCubes.Count);
             for (int i = 0; i < batteryCubes.Count; i++)

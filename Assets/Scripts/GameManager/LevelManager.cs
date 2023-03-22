@@ -23,10 +23,11 @@ namespace GameManager
         public WorldRangeBox rangeBox;
         public LevelUIManager levelUIManager;
         public Transform trappedPersonParent;
-        public SubtitlesPool subtitlesPool;
 
         #endregion
-
+        
+        private SubtitlesPool subtitlesPool;
+        public SubtitlesPool SubtitlesPool => this.LazyGetComponent(subtitlesPool);
         MinimapManager MinimapManager => levelUIManager.minimapManager;
         ViewportUIManager ViewportUIManager => levelUIManager.viewportUIManager;
         private List<TrappedPerson> trappedPersons;
@@ -59,7 +60,7 @@ namespace GameManager
         private Timer timer;
         [FormerlySerializedAs("novelRescue")] public NovelRescue rescue;
         public Timer Timer => this.LazyGetComponent(timer);
-        public int TimeRemain => timeToEnd - Timer.IntTick;// how long from now to end
+        public float TimeRemain => timeToEnd - Timer.Tick;// how long from now to end
         private CameraController cameraController;
         public CameraController CameraController
         {
@@ -124,8 +125,17 @@ namespace GameManager
         {
             FreshPersonStatus();
             FreshRescueList();
+            BatteryUpdate();
             DebugUpdate();
             CheckEndings();
+        }
+
+        public void BatteryUpdate()
+        {
+            if (TimeRemain >= 0)
+            {
+                onBatteryChanged.Invoke(TimeRemain/ timeToEnd);
+            }
         }
 
         private void FreshPersonStatus()
@@ -163,14 +173,18 @@ namespace GameManager
 
         public void MakeTag(TrappedPerson person, TriageTag triageTag)
         {
-            // todo: deal with black tag
-            // now Insert method will do nothing when person was marked black already
-            if (person.TriageTag == triageTag) return;
 
+            if (person.TriageTag == triageTag) return;
+            if (triageTag == TriageTags.TriageTags.Black)
+            {
+                rescue.Remove(person);
+                person.TriageTag = TriageTags.TriageTags.Black;
+                return;
+            }
             rescue.Insert(person, triageTag);
         }
 
-        #region Endings
+        #region OnEnd
 
         // how long this game will be
         [SerializeField] private int timeToEnd;

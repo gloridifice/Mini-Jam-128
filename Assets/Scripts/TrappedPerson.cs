@@ -54,13 +54,22 @@ public class TrappedPerson : MonoBehaviour
 {
     public int Time => (int)severity - timeOffset;
     public int timeOffset;
-    public int TimeRemain => Time - Timer.IntTick;
+    public float TimeRemain => Time - Timer.Tick;
     public Severity severity;
 
     public string personName;
     public Age age;
-    public MeasureStage Heartbeat => GetHeartbeat(TimeRemain, severity);
-    public uint BPM => GetBPM(TimeRemain, severity);
+    public MeasureStage Heartbeat => GetHeartbeat((int)TimeRemain, severity);
+    private uint bpm;
+    public uint BPM
+    {
+        get => bpm;
+        set
+        {
+            bpm = value;
+            onBPMChanged.Invoke(value);
+        }
+    }
     public MeasureStage RespiratoryRate => Heartbeat;
     public int InjurySeverity => GetInjurySeverity();
 
@@ -106,6 +115,7 @@ public class TrappedPerson : MonoBehaviour
     [HideInInspector] public UnityEvent onSoundUnlock;
     [HideInInspector] public UnityEvent onHealthUnlock;
     [HideInInspector] public UnityEvent onLifeUnlock;
+    [HideInInspector] public FloatEvent onBPMChanged;
 
     public ViewportTrappedPerson viewportPerson;
 
