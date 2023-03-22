@@ -148,7 +148,6 @@ namespace GameManager
                     person.Status = PersonStatus.Died;
                     Counter.AddDiedPerson(person);
                     rescue.Remove(person);
-                    // TODO: how does ui deal with a person's death?
                 }
             }
 
