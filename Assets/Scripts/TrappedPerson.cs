@@ -276,6 +276,11 @@ public class TrappedPerson : MonoBehaviour
         RescueUpdate();
     }
 
+    public string GetSubtitle()
+    {
+        return LevelManager.Instance.SubtitlesPool.GetSubtitle(subtitleTag, InjurySeverity);
+    }
+
     void OnCameraMoved(CameraController controller)
     {
         CheckBeFound(controller);
