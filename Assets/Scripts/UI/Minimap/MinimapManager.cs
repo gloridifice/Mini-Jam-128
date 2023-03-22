@@ -11,6 +11,7 @@ namespace UI.Minimap
     public class MinimapManager : UIBehaviour
     {
         public static MinimapManager Instance;
+
         #region EditorInspector
 
         [SerializeField] private GameObject trappedPersonPrefab;
@@ -30,23 +31,24 @@ namespace UI.Minimap
             Instance = this;
         }
 
-        public void Init(List<TrappedPerson> trappedPersons)
+        public void Init()
         {
-            //添加伤员
-            foreach (var person in trappedPersons)
-            {
-                GameObject uiObj = GameObject.Instantiate(trappedPersonPrefab, mapObjectsParent);
-                if (uiObj.TryGetComponent(out MapTrappedPerson mapTrappedPerson))
-                {
-                    mapTrappedPerson.Init(person);
-                }
-            }
-
+            LevelManager.Instance.CameraController.onFindTrappedPerson.AddListener(OnFindTrappedPerson);
             //添加玩家
             GameObject playerUIObj = GameObject.Instantiate(playerPrefab, mapObjectsParent);
             if (playerUIObj.TryGetComponent(out MapPlayer mapObject))
             {
                 mapObject.Init(LevelManager.Instance.CameraController);
+            }
+        }
+
+        void OnFindTrappedPerson(TrappedPerson person)
+        {
+            //添加伤员
+            GameObject uiObj = GameObject.Instantiate(trappedPersonPrefab, mapObjectsParent);
+            if (uiObj.TryGetComponent(out MapTrappedPerson mapTrappedPerson))
+            {
+                mapTrappedPerson.Init(person);
             }
         }
     }

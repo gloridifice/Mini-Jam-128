@@ -6,6 +6,7 @@ using UI.Minimap;
 using UI.Viewport;
 using TriageTags;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace GameManager
@@ -42,6 +43,8 @@ namespace GameManager
                         if (personTran.TryGetComponent(out TrappedPerson trappedPerson))
                         {
                             trappedPersons.Add(trappedPerson);
+                            trappedPerson.onBeFound.AddListener(cameraController.onFindTrappedPerson.Invoke);
+                            trappedPerson.onStatusChanged.AddListener(onPersonStatusChanged.Invoke);
                         }
                     }
                 }
@@ -58,7 +61,6 @@ namespace GameManager
         public Timer Timer => this.LazyGetComponent(timer);
         public int TimeRemain => timeToEnd - Timer.IntTick;// how long from now to end
         private CameraController cameraController;
-
         public CameraController CameraController
         {
             get
@@ -79,10 +81,35 @@ namespace GameManager
             }
         }
 
+        [HideInInspector] public FloatEvent onBatteryChanged;
         private void Start()
         {
             rescue = new NovelRescue();
             End += (_, _) => { OnEnd(); };
+            levelUIManager.Init();
+            
+            CameraController.onFindTrappedPerson.AddListener(OnFindTrappedPerson);
+            onPersonStatusChanged.AddListener(OnPersonStatusChanged);
+        }
+
+        [HideInInspector] public int foundPersonCount;
+        [HideInInspector] public int savedPersonCount;
+        [HideInInspector] public UnityEvent<int> onFoundPersonCountChanged;
+        [HideInInspector] public UnityEvent<int> onSavedPersonCountChanged;
+        [HideInInspector] public UnityEvent<TrappedPerson, PersonStatus, PersonStatus> onPersonStatusChanged;
+        void OnFindTrappedPerson(TrappedPerson person)
+        {
+            foundPersonCount++;
+            onFoundPersonCountChanged.Invoke(foundPersonCount);
+        }
+
+        void OnPersonStatusChanged(TrappedPerson person, PersonStatus preStatus, PersonStatus newStatus)
+        {
+            if (newStatus == PersonStatus.Saved)
+            {
+                savedPersonCount++;
+                onSavedPersonCountChanged.Invoke(savedPersonCount);
+            }
         }
 
         private LevelInput input;
@@ -106,7 +133,7 @@ namespace GameManager
             foreach (var person in TrappedPersons)
             {
                 if (person.Status is PersonStatus.Died or PersonStatus.Saved) continue;
-                if (person.Time < Timer.IntTick)
+                if (person.Time < Timer.Tick)
                 {
                     person.Status = PersonStatus.Died;
                     Counter.AddDiedPerson(person);
@@ -139,7 +166,7 @@ namespace GameManager
             // todo: deal with black tag
             // now Insert method will do nothing when person was marked black already
             if (person.TriageTag == triageTag) return;
-            
+
             rescue.Insert(person, triageTag);
         }
 
@@ -173,12 +200,6 @@ namespace GameManager
 
         private void DebugUpdate()
         {
-            //init minimap
-            if (UnityEngine.Input.GetKeyDown((KeyCode.O)))
-            {
-                MinimapManager.Init(TrappedPersons);
-                ViewportUIManager.Init(TrappedPersons);
-            }
         }
 
         #endregion

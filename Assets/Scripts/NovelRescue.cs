@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TriageTags;
+using Unity.VisualScripting;
 
 [Serializable]
 public class NovelRescue
@@ -26,6 +27,8 @@ public class NovelRescue
     {
         // if the person was marked black, we should do nothing
         if (person.TriageTag == TriageTags.TriageTags.Black) return;
+        
+        if (person.Status != PersonStatus.Waiting) return;
         
         // 1. if this is a first enqueue
         if (person.TriageTag == TriageTags.TriageTags.None)
@@ -96,7 +99,7 @@ public class NovelRescue
     {
         if (triageTag == TriageTags.TriageTags.None || triageTag == TriageTags.TriageTags.Black)
         {
-            throw new ArgumentOutOfRangeException(nameof(triageTag), triageTag, "Can't set the tag to None!");
+            throw new ArgumentOutOfRangeException(nameof(triageTag), triageTag, "Can't set the tag to " + triageTag.type + "!");
         }
 
         if (triageTag == TriageTags.TriageTags.Red)
