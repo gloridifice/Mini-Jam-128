@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using TriageTags;
 using UI.Module;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -40,6 +41,7 @@ namespace UI.Viewport.PersonInfoBar
             person.onLifeUnlock.AddListener(onLifeUnlock.Invoke);
             person.onStatusChanged.AddListener(OnPersonStatusChanged);
             person.viewportPerson.onElementMoved.AddListener(OnMove);
+            person.onTagChanged.AddListener(OnPersonTagChanged);
             OnMove(person.viewportPerson.Rect.anchoredPosition);
             
             scanningBar.Init(person);
@@ -59,6 +61,13 @@ namespace UI.Viewport.PersonInfoBar
             FloatingUI.actualPos = pos + (Camera.main.pixelWidth * 0.05f) * Vector2.right;
         }
 
+        void OnPersonTagChanged(TrappedPerson trappedPerson, TriageTag preTag, TriageTag newTag)
+        {
+            if (newTag == TriageTags.TriageTags.Black)
+            {
+                Die();
+            }
+        }
 
         public void Hide()
         {

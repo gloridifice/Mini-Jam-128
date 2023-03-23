@@ -48,7 +48,7 @@ namespace UI.Viewport
             }
         }
 
-        public bool CanInteractWith => person.Status != PersonStatus.Died;
+        public bool CanInteractWith => person.Status != PersonStatus.Died && person.TriageTag != TriageTags.TriageTags.Black;
 
         [HideInInspector] public UnityEvent<Vector2> onElementMoved;
 

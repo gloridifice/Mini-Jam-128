@@ -40,7 +40,7 @@ namespace UI.Viewport.PersonInfoBar
         private void SetColor(Color lightColor, Color darkColor)
         {
             icon.color = lightColor;
-            text.outlineColor = lightColor;
+            text.color = lightColor;
             if (progressBar.container.TryGetComponent(out Image image)) image.color = darkColor;
             if (progressBar.progress.TryGetComponent(out Image progressImage)) progressImage.color = lightColor;
         }
