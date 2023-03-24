@@ -319,7 +319,7 @@ public class TrappedPerson : MonoBehaviour
         };
     }
 
-    private uint GetBPM(int t, Severity s)
+    public uint GetBPM(int t, Severity s)
     {
         return s switch
         {

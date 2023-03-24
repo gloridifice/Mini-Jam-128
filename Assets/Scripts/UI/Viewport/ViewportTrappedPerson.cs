@@ -10,6 +10,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace UI.Viewport
 {
@@ -20,6 +21,7 @@ namespace UI.Viewport
         public Image image;
         public FadeTwnUIBehaviour crossIcon;
         public GameObject tagSelectorPrefab;
+        public GameObject soundTipPrefab;
 
         [Header("Animation")] [Range(0, 2)] public float duration;
         [Range(0, 2)] public float scale;
@@ -33,6 +35,7 @@ namespace UI.Viewport
         public CanvasGroup CanvasGroup => this.LazyGetComponent(canvasGroup);
 
         private Tweener mouseHoverTwn;
+
         public Tweener MouserHoverTwn
         {
             get
@@ -48,7 +51,8 @@ namespace UI.Viewport
             }
         }
 
-        public bool CanInteractWith => person.Status != PersonStatus.Died && person.TriageTag != TriageTags.TriageTags.Black;
+        public bool CanInteractWith =>
+            person.Status != PersonStatus.Died && person.TriageTag != TriageTags.TriageTags.Black;
 
         [HideInInspector] public UnityEvent<Vector2> onElementMoved;
 
@@ -85,6 +89,34 @@ namespace UI.Viewport
                 }
 
                 person.isGettingInfo = Input.GetKey(KeyCode.Mouse1);
+            }
+        }
+
+        private float soundTipGenerateCounter;
+        public float soundInterval = 3;
+        public float soundTipGenRange = 20;
+
+        private void FixedUpdate()
+        {
+            if (!CanInteractWith) return;
+            soundTipGenerateCounter -= Time.fixedDeltaTime;
+            if (soundTipGenerateCounter <= 0)
+            {
+                soundTipGenerateCounter = soundInterval + Random.Range(-1f, 3f);
+                if (person.soundScanningInfo.isUnlock)
+                {
+                    GameObject obj = GameObject.Instantiate(soundTipPrefab, transform);
+                    if (obj.TryGetComponent(out SoundTip soundTip))
+                    {
+                        float x = 0f;
+                        float y = 0f;
+                        x += Random.Range(-soundTipGenRange, 0);
+                        y += Random.Range(-soundTipGenRange, soundTipGenRange);
+                        soundTip.Rect.anchoredPosition = new Vector2(x, y);
+                        float time = 1.5f + Random.Range(0f, 1f);
+                        soundTip.Init(person.GetSubtitle(), time);
+                    }
+                }
             }
         }
 
@@ -143,7 +175,7 @@ namespace UI.Viewport
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (!CanInteractWith)return;
+            if (!CanInteractWith) return;
             isMouseOver = true;
             MouserHoverTwn.PlayForward();
             ShowInfo();

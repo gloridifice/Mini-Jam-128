@@ -13,11 +13,26 @@ namespace UI.Viewport.PersonInfoBar
         public void Init(TrappedPerson person)
         {
             this.person = person;
+            OnHeartBeatChanged(person.GetBPM((int)person.TimeRemain, person.severity));
+        }
+
+
+        private int counter;
+        public float interval = 2;
+
+        private void FixedUpdate()
+        {
+            if (person == null) return;
+            counter++;
+            if (counter % (int)(50 * interval) == 0)
+            {
+                OnHeartBeatChanged(person.GetBPM((int)person.TimeRemain, person.severity));
+            }
         }
 
         public void OnHeartBeatChanged(float value)
         {
-            CounterWithIcon.Counter = (int) value;
+            CounterWithIcon.Counter = (int)value;
         }
     }
 }
