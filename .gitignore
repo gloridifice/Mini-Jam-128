@@ -85,3 +85,5 @@ URP-HighFidelity-Renderer.asset
 # Test scripts
 test.cs
 test.cs.meta
+
+ProjectSettings/ProjectVersion.txt

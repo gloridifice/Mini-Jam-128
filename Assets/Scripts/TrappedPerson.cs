@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameManager;
+using Level;
 using TMPro;
 using TriageTags;
 using UI.Viewport;
@@ -57,8 +58,7 @@ public class TrappedPerson : MonoBehaviour
     public float TimeRemain => Time - Timer.Tick;
     public Severity severity;
 
-    public string personName;
-    public Age age;
+    public TrappedPersonInfo personalInfo;
     public MeasureStage Heartbeat => GetHeartbeat((int)TimeRemain, severity);
     private uint bpm;
     public uint BPM
@@ -72,7 +72,6 @@ public class TrappedPerson : MonoBehaviour
     }
     public MeasureStage RespiratoryRate => Heartbeat;
     public int InjurySeverity => GetInjurySeverity();
-
 
     public SubtitleTag subtitleTag;
     private TriageTag triageTag = TriageTags.TriageTags.None;
@@ -369,7 +368,7 @@ public class TrappedPerson : MonoBehaviour
     private int GetInjurySeverity()
     {
         int injurySeverity = 0;
-        injurySeverity += (int)age.age;
+        injurySeverity += (int)personalInfo.age.age;
         injurySeverity += ISFromHeartbeat(Heartbeat);
         injurySeverity += ISFromRespiratoryRate(RespiratoryRate);
 
