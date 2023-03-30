@@ -97,16 +97,20 @@ MonoBehaviour:
   deltaSpeed: 0.7
   image: {fileID: 7519924987018580325}
   crossIcon: {fileID: 1341937674024481733}
-  person: {fileID: 0}
-  isMouseOver: 0
   tagSelectorPrefab: {fileID: 3381856939987768800, guid: 3c3079295ca3e3243ad734bc6597a393,
+    type: 3}
+  soundTipPrefab: {fileID: 5198162064893524244, guid: 942be83dce402452b9cf55f3952b0ab2,
     type: 3}
   duration: 0.25
   scale: 1.2
   animEase: 6
+  person: {fileID: 0}
+  isMouseOver: 0
   onElementMoved:
     m_PersistentCalls:
       m_Calls: []
+  soundInterval: 3
+  soundTipGenRange: 20
   infoBarPrefab: {fileID: 6091757189569589102, guid: 93b2930143ab4414caf4f191def065ae,
     type: 3}
 --- !u!225 &2840200503022589190
@@ -289,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldAppear: 0
   isActive: 0
+  waitForDie: 0
 --- !u!225 &3446666470687367866
 CanvasGroup:
   m_ObjectHideFlags: 0

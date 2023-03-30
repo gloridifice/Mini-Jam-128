@@ -32,9 +32,11 @@ namespace UI
         public bool shouldAppear = false;
         public bool IsAppeared => gameObject.activeSelf && (AppearTwn.IsPlaying() || AppearTwn.IsComplete());
         public bool isActive = false;
+        public bool waitForDie = false;
 
         public virtual void UpdateAppearCondition(bool b)
         {
+            if (waitForDie) return;
             shouldAppear = b;
             if (isActive && shouldAppear && !IsAppeared)
             {
@@ -49,6 +51,7 @@ namespace UI
 
         public virtual void ForceAppear()
         {
+            if (waitForDie) return;
             shouldAppear = true;
             Active();
             Appear();
@@ -69,6 +72,7 @@ namespace UI
 
         public virtual void ForceDisappearToDestroy()
         {
+            waitForDie = true;
             ForceDisappear();
             AppearTwn.onComplete += () => { Destroy(this); };
         }

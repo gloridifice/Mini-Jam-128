@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using TriageTags;
 using UI.Module;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace UI.Viewport.PersonInfoBar
         public RescueBar rescueBar;
 
         public HeartBeatPanel heartBeatPanel;
+        public LifeTimePanel lifeTimePanel;
 
         public FloatEvent onScanningProgressChanged;
         public FloatEvent onRescueProgressChanged;
@@ -40,11 +42,13 @@ namespace UI.Viewport.PersonInfoBar
             person.onLifeUnlock.AddListener(onLifeUnlock.Invoke);
             person.onStatusChanged.AddListener(OnPersonStatusChanged);
             person.viewportPerson.onElementMoved.AddListener(OnMove);
+            person.onTagChanged.AddListener(OnPersonTagChanged);
             OnMove(person.viewportPerson.Rect.anchoredPosition);
             
             scanningBar.Init(person);
             rescueBar.Init(person);
             heartBeatPanel.Init(person);
+            lifeTimePanel.Init(person);
             Display();
             initialized = true;
             
@@ -59,11 +63,19 @@ namespace UI.Viewport.PersonInfoBar
             FloatingUI.actualPos = pos + (Camera.main.pixelWidth * 0.05f) * Vector2.right;
         }
 
+        void OnPersonTagChanged(TrappedPerson trappedPerson, TriageTag preTag, TriageTag newTag)
+        {
+            if (newTag == TriageTags.TriageTags.Black)
+            {
+                Die();
+            }
+        }
 
         public void Hide()
         {
             scanningBar.ForceDisappear();
             heartBeatPanel.ForceDisappear();
+            lifeTimePanel.ForceDisappear();
         }
         public void Display()
         {
@@ -71,6 +83,7 @@ namespace UI.Viewport.PersonInfoBar
             scanningBar.Active();
             rescueBar.Active();
             heartBeatPanel.Active();
+            lifeTimePanel.Active();
         }
 
         void OnPersonStatusChanged(TrappedPerson person, PersonStatus preStatus, PersonStatus newStatus)
@@ -90,6 +103,7 @@ namespace UI.Viewport.PersonInfoBar
             scanningBar.UpdateAppearCondition(person.ShouldShowScanning);
             rescueBar.UpdateAppearCondition(person.ShouldShowRescueBar);
             heartBeatPanel.UpdateAppearCondition(person.healthScanningInfo.isUnlock);
+            lifeTimePanel.UpdateAppearCondition(person.lifeScanningInfo.isUnlock);
         }
     }
 }
