@@ -1,6 +1,7 @@
 using GameManager;
 using UI.Minimap;
 using UI.Module;
+using UI.Settlement;
 using UI.Viewport;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace UI
         public BatteryDisplay battery;
         public CounterWithIcon savedPersonCount;
         public CounterWithIcon foundPersonCount;
+        public SettlementUIManager settlementUIManager;
 
         public void Init()
         {

@@ -254,6 +254,7 @@ public class TrappedPerson : MonoBehaviour
         }
     }
 
+
     #endregion
 
 
@@ -365,6 +366,11 @@ public class TrappedPerson : MonoBehaviour
         };
     }
 
+    public TrappedPersonSettlementInfo GetSettlementInfo()
+    {
+        TrappedPersonSettlementInfo info = new TrappedPersonSettlementInfo(TimeRemain, personalInfo);
+        return info;
+    }
     private int GetInjurySeverity()
     {
         int injurySeverity = 0;

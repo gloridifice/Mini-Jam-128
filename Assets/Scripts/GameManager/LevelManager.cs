@@ -190,7 +190,7 @@ namespace GameManager
 
         private void OnEnd()
         {
-            // TODO: impl endings
+            levelUIManager.settlementUIManager.DisplayAndInit();
         }
 
         private void CheckEndings()

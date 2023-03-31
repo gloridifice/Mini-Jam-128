@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Level;
 using UnityEngine;
 
 namespace GameManager
@@ -6,11 +7,13 @@ namespace GameManager
     public class Counter : MonoBehaviour
     {
         private List<TrappedPerson> savedPersons;
+        private List<TrappedPersonSettlementInfo> savedPersonSettlementInfos;
         private List<TrappedPerson> diedPersons;
 
         public List<TrappedPerson> SavedPersons => savedPersons;
         public List<TrappedPerson> DiedPersons => diedPersons;
 
+        public List<TrappedPersonSettlementInfo> SavedPersonSettlementInfos => savedPersonSettlementInfos;
         public int SavedPersonsCount => savedPersons.Count;
         public int DiedPersonsCount => diedPersons.Count;
 
@@ -22,6 +25,7 @@ namespace GameManager
 
         public void AddSavedPerson(TrappedPerson tar)
         {
+            savedPersonSettlementInfos.Add(tar.GetSettlementInfo());
             savedPersons.Add(tar);
         }
 
