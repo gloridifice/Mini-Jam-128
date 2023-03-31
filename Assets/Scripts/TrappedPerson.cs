@@ -333,36 +333,39 @@ public class TrappedPerson : MonoBehaviour
 
     private uint LowSeverityBPM(int t)
     {
-        return t switch
+        var remain = t / LevelManager.Instance.lowLifeTime;
+        return remain switch
         {
-            (>= 0) and (< 60) => (uint)Random.Range(30, 40),
-            (>= 60) and (< 150) => (uint)Random.Range(120, 130),
-            (>= 150) and (< 270) => (uint)Random.Range(80, 110),
-            (>= 270) and (< 390) => (uint)Random.Range(60, 65),
+            (>= 0) and (< 60/390f) => (uint)Random.Range(30, 40),
+            (>= 60/390f) and (< 150/390f) => (uint)Random.Range(120, 130),
+            (>= 150/390f) and (< 270/390f) => (uint)Random.Range(80, 110),
+            (>= 270/390f) and (< 1f) => (uint)Random.Range(60, 65),
             _ => 0,
         };
     }
     
     private uint MidSeverityBPM(int t)
     {
-        return t switch
+        var remain = t / LevelManager.Instance.midLifeTime;
+        return remain switch
         {
-            (>= 0) and (< 40) => (uint)Random.Range(30, 40),
-            (>= 40) and (< 120) => (uint)Random.Range(120, 140),
-            (>= 120) and (< 220) => (uint)Random.Range(100, 120),
-            (>= 220) and (< 300) => (uint)Random.Range(60, 80),
+            (>= 0f) and (< 40/300f) => (uint)Random.Range(30, 40),
+            (>= 40/300f) and (< 120/300f) => (uint)Random.Range(120, 140),
+            (>= 120/300f) and (< 220/300f) => (uint)Random.Range(100, 120),
+            (>= 220/300f) and (< 1f) => (uint)Random.Range(60, 80),
             _ => 0,
         };
     }
     
     private uint HighSeverityBPM(int t)
     {
-        return t switch
+        var remain = t / LevelManager.Instance.highLifeTime;
+        return remain switch
         {
-            (>= 0) and (< 60) => (uint)Random.Range(130, 150),
-            (>= 60) and (< 90) => (uint)Random.Range(60, 120),
-            (>= 90) and (< 180) => (uint)Random.Range(120, 130),
-            (>= 180) and (< 240) => (uint)Random.Range(80, 100),
+            (>= 0f) and (< 60/240f) => (uint)Random.Range(130, 150),
+            (>= 60/240f) and (< 90/240f) => (uint)Random.Range(60, 120),
+            (>= 90/240f) and (< 180/240f) => (uint)Random.Range(120, 130),
+            (>= 180/240f) and (< 1f) => (uint)Random.Range(80, 100),
             _ => 0,
         };
     }
