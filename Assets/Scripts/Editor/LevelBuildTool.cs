@@ -16,7 +16,7 @@ namespace Game.Editor
         private static void ShowWindow()
         {
             var window = GetWindow<LevelBuildTool>();
-            window.titleContent = new GUIContent("TITLE");
+            window.titleContent = new GUIContent("Level Build Tool");
             window.Show();
         }
 
