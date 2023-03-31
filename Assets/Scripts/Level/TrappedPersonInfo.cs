@@ -6,6 +6,7 @@ namespace Level
     public class TrappedPersonInfo
     {
         public string personName;
+        public int familiesCount;
         public Age age;
     }
 }
