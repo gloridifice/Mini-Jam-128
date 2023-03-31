@@ -25,6 +25,9 @@ namespace UI.Minimap
             person.onStatusChanged.AddListener(OnStatusChanged);
 
             FadeTwn.ForceAppear();
+            
+            OnStatusChanged(person, person.Status, person.Status);
+            OnTagChanged(person, person.TriageTag, person.TriageTag);
         }
 
         void OnGetRescue()
@@ -35,11 +38,16 @@ namespace UI.Minimap
         }
         void OnTagChanged(TrappedPerson person, TriageTag preTag, TriageTag newTag)
         {
+            if (newTag == TriageTags.TriageTags.None)
+            {
+                return;
+            }
             colorDot.color = newTag.color;
         }
 
         void OnStatusChanged(TrappedPerson person, PersonStatus preStatus, PersonStatus newStatus)
         {
+            if (newStatus == PersonStatus.Waiting) { return; }
             if (newStatus == PersonStatus.Saved)
             {
                 OnGetRescue();

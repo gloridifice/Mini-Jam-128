@@ -1,5 +1,10 @@
 using System;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Assertions;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public static class UniversalUtils
 {
@@ -22,6 +27,7 @@ public static class UniversalUtils
 
         return componet;
     }
+
     public static T LazyGetComponentInChildren<T>(this MonoBehaviour behaviour, T componet)
     {
         if (componet == null)
@@ -46,8 +52,24 @@ public static class UniversalUtils
     {
         return new Color((float)r / 255f, (float)g / 255f, (float)b / 255f, (float)a / 255f);
     }
+
     public static Color FromHtmlString(String color)
     {
         return Color.black;
+    }
+
+    public static void Shuffle<T>(List<T> list)
+    {
+        for (var i = 0; i != list.Count - 1; i++)
+        {
+            var index = Random.Range(i + 1, list.Count);
+            Assert.IsTrue(index >= 0);
+            (list[i], list[index]) = (list[index], list[i]);
+        }
+    }
+
+    public static T ObjectField<T>(string name, Object obj) where T : Object
+    {
+        return EditorGUILayout.ObjectField(name, obj, typeof(T), obj) as T;
     }
 }

@@ -74,10 +74,10 @@ namespace UI.Viewport
             base.Update();
             if (isMouseOver)
             {
-                if (Input.GetKeyDown(KeyCode.H)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Red);
-                if (Input.GetKeyDown(KeyCode.J)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Yellow);
-                if (Input.GetKeyDown(KeyCode.K)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Green);
-                if (Input.GetKeyDown(KeyCode.L)) LevelManager.Instance.MakeTag(person, TriageTags.TriageTags.Black);
+                if (Input.GetKeyDown(KeyCode.H)) LevelManager.Instance.MarkTag(person, TriageTags.TriageTags.Red);
+                if (Input.GetKeyDown(KeyCode.J)) LevelManager.Instance.MarkTag(person, TriageTags.TriageTags.Yellow);
+                if (Input.GetKeyDown(KeyCode.K)) LevelManager.Instance.MarkTag(person, TriageTags.TriageTags.Green);
+                if (Input.GetKeyDown(KeyCode.L)) LevelManager.Instance.MarkTag(person, TriageTags.TriageTags.Black);
 
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {

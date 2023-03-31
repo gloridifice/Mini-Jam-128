@@ -26,7 +26,7 @@ namespace UI.Viewport.TagSelector
 
         public void Mark(TriageTag triageTag)
         {
-            LevelManager.Instance.MakeTag(person, triageTag);
+            LevelManager.Instance.MarkTag(person, triageTag);
         }
 
         private void Update()

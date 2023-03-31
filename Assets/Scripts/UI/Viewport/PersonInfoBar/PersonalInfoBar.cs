@@ -60,7 +60,7 @@ namespace UI.Viewport.PersonInfoBar
 
         public void OnMove(Vector2 pos)
         {
-            FloatingUI.actualPos = pos + (Camera.main.pixelWidth * 0.05f) * Vector2.right;
+            FloatingUI.actualPos = pos + 40f * Vector2.right;
         }
 
         void OnPersonTagChanged(TrappedPerson trappedPerson, TriageTag preTag, TriageTag newTag)

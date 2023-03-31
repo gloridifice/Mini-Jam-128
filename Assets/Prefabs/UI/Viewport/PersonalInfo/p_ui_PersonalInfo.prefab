@@ -793,7 +793,7 @@ MonoBehaviour:
   shouldAppear: 0
   isActive: 0
   waitForDie: 0
-  interval: 10
+  interval: 2
 --- !u!225 &891655047416385637
 CanvasGroup:
   m_ObjectHideFlags: 0

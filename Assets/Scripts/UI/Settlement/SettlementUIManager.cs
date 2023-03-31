@@ -11,7 +11,7 @@ namespace UI.Settlement
     public class SettlementUIManager : FadeTwnUIBehaviour
     {
         public LevelManager LevelManager => LevelManager.Instance;
-        public Counter Counter => LevelManager.Counter;
+        public PersonCounter PersonCounter => LevelManager.PersonCounter;
         public GameObject tipPrefab;
         public RectTransform tipsParent;
         public CounterWithIcon savedCounter;
@@ -33,7 +33,7 @@ namespace UI.Settlement
         }
         public void Init()
         {
-            SetSavedCount(Counter.SavedPersonsCount);
+            SetSavedCount(PersonCounter.SavedPersonsCount);
             SetFoundCount(LevelManager.foundPersonCount);
             foreach (var tip in tips)
             {

@@ -22,11 +22,11 @@ namespace UI.Viewport.PersonInfoBar
             var progressBarPos = progressBar.Rect.anchoredPosition;
             var containerLength = progressBar.ContainerLength;
             sound.Rect.anchoredPosition =
-                progressBarPos + containerLength * person.soundScanningInfo.rate * Vector2.right;
+                progressBarPos + containerLength * person.soundScanningInfo.Rate * Vector2.right;
             health.Rect.anchoredPosition =
-                progressBarPos + containerLength * person.healthScanningInfo.rate * Vector2.right;
+                progressBarPos + containerLength * person.healthScanningInfo.Rate * Vector2.right;
             life.Rect.anchoredPosition =
-                progressBarPos + containerLength * person.lifeScanningInfo.rate * Vector2.right;
+                progressBarPos + containerLength * person.lifeScanningInfo.Rate * Vector2.right;
 
             progressBar.Init();
         }

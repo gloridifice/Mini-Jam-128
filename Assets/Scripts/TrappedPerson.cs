@@ -7,6 +7,7 @@ using TMPro;
 using TriageTags;
 using UI.Viewport;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -43,9 +44,9 @@ public enum SubtitleTag
 
 public enum Severity
 {
-    Low = 390,
-    Mid = 300,
-    High = 240,
+    Low,
+    Mid,
+    High 
 }
 
 /// <summary>
@@ -53,23 +54,24 @@ public enum Severity
 /// </summary>
 public class TrappedPerson : MonoBehaviour
 {
-    public int Time => (int)severity - timeOffset;
-    public int timeOffset;
+    public static float GetLifeTime(Severity s)
+    {
+        switch (s)
+        {
+            case Severity.High: return LevelManager.Instance.highLifeTime;
+            case Severity.Mid: return LevelManager.Instance.midLifeTime;
+            case Severity.Low: return LevelManager.Instance.lowLifeTime;
+        }
+        return 0;
+    }
+    public float Time => GetLifeTime(severity) - timeOffset;
+    public float timeOffset;
     public float TimeRemain => Time - Timer.Tick;
     public Severity severity;
 
     public TrappedPersonInfo personalInfo;
     public MeasureStage Heartbeat => GetHeartbeat((int)TimeRemain, severity);
     private uint bpm;
-    public uint BPM
-    {
-        get => bpm;
-        set
-        {
-            bpm = value;
-            onBPMChanged.Invoke(value);
-        }
-    }
     public MeasureStage RespiratoryRate => Heartbeat;
     public int InjurySeverity => GetInjurySeverity();
 
@@ -114,7 +116,6 @@ public class TrappedPerson : MonoBehaviour
     [HideInInspector] public UnityEvent onSoundUnlock;
     [HideInInspector] public UnityEvent onHealthUnlock;
     [HideInInspector] public UnityEvent onLifeUnlock;
-    [HideInInspector] public FloatEvent onBPMChanged;
 
     public ViewportTrappedPerson viewportPerson;
 
@@ -125,13 +126,13 @@ public class TrappedPerson : MonoBehaviour
     public class ScanningInfo
     {
         public bool isUnlock;
-        public float unlockTime;
-        public float rate;
+        public float unlockRate;
+        public float UnlockTime => unlockRate * LevelManager.Instance.scanningTime;
+        public float Rate => UnlockTime / LevelManager.Instance.scanningTime;
 
-        public ScanningInfo(float unlockTime, float fullTime)
+        public ScanningInfo(float unlockTime)
         {
-            this.unlockTime = unlockTime;
-            this.rate = unlockTime / fullTime;
+            this.unlockRate = unlockTime;
         }
     }
 
@@ -140,10 +141,10 @@ public class TrappedPerson : MonoBehaviour
     private float scanningStartTime;
     private float scanningAccumulatedTime;
     private float scanningCurrentTime;
-    private const float FullScanTime = 9;
-    public ScanningInfo soundScanningInfo = new(3, FullScanTime);
-    public ScanningInfo healthScanningInfo = new(6, FullScanTime);
-    public ScanningInfo lifeScanningInfo = new(9, FullScanTime);
+    private float FullScanTime => LevelManager.Instance.scanningTime;
+    public ScanningInfo soundScanningInfo = new(0.2f);
+    public ScanningInfo healthScanningInfo = new(0.6f);
+    public ScanningInfo lifeScanningInfo = new(1.0f);
     private event EventHandler ShowVoice;
     private event EventHandler ShowHeartbeat;
     private event EventHandler ShowFullInfo;
@@ -169,17 +170,17 @@ public class TrappedPerson : MonoBehaviour
         {
             isScanningProgressClear = false;
             scanningCurrentTime = scanningAccumulatedTime + TimeAccumulation();
-            if (scanningCurrentTime > soundScanningInfo.unlockTime)
+            if (scanningCurrentTime > soundScanningInfo.UnlockTime)
             {
                 ShowVoice?.Invoke(this, EventArgs.Empty);
             }
 
-            if (scanningCurrentTime > healthScanningInfo.unlockTime)
+            if (scanningCurrentTime > healthScanningInfo.UnlockTime)
             {
                 ShowHeartbeat?.Invoke(this, EventArgs.Empty);
             }
 
-            if (scanningCurrentTime > lifeScanningInfo.unlockTime)
+            if (scanningCurrentTime > lifeScanningInfo.UnlockTime)
             {
                 ShowFullInfo?.Invoke(this, EventArgs.Empty);
             }
@@ -191,8 +192,8 @@ public class TrappedPerson : MonoBehaviour
             RefreshStartTime();
             if (!isScanningProgressClear)
             {
-                if (soundScanningInfo.isUnlock) scanningAccumulatedTime = soundScanningInfo.unlockTime;
-                if (healthScanningInfo.isUnlock) scanningAccumulatedTime = healthScanningInfo.unlockTime;
+                if (soundScanningInfo.isUnlock) scanningAccumulatedTime = soundScanningInfo.UnlockTime;
+                if (healthScanningInfo.isUnlock) scanningAccumulatedTime = healthScanningInfo.UnlockTime;
                 scanningCurrentTime = scanningAccumulatedTime;
                 onScanningProgressChanged.Invoke(ScanningRate);
                 isScanningProgressClear = true;
@@ -227,7 +228,7 @@ public class TrappedPerson : MonoBehaviour
 
     #region GetRescue
 
-    public const float TimeToRescue = 10;
+    public float TimeToRescue => LevelManager.Instance.rescueTime;
     [HideInInspector] public float rescueTime;
     public bool ShouldShowRescueBar => rescueTime > 0 && PersonStatus.Waiting == Status;
     private float rescueTimeStart;
@@ -374,7 +375,7 @@ public class TrappedPerson : MonoBehaviour
     private int GetInjurySeverity()
     {
         int injurySeverity = 0;
-        injurySeverity += (int)personalInfo.age.age;
+        injurySeverity += (int)personalInfo.age.AgePeriod;
         injurySeverity += ISFromHeartbeat(Heartbeat);
         injurySeverity += ISFromRespiratoryRate(RespiratoryRate);
 
@@ -394,6 +395,7 @@ public class TrappedPerson : MonoBehaviour
             case MeasureStage.Normal:
                 return 0;
             case MeasureStage.Zero:
+                return 0;
             default:
                 throw new ArgumentOutOfRangeException(nameof(respiratoryRate), respiratoryRate, null);
         }
@@ -413,6 +415,7 @@ public class TrappedPerson : MonoBehaviour
             case MeasureStage.High:
                 return 1;
             case MeasureStage.Zero:
+                return 0;
             default:
                 throw new ArgumentOutOfRangeException(nameof(heartbeat), heartbeat, null);
         }

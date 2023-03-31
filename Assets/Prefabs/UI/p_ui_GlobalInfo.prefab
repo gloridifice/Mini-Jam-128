@@ -200,6 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2704429575549204665}
   - component: {fileID: 698942270614923040}
+  - component: {fileID: 2499719197949889005}
   m_Layer: 5
   m_Name: p_ui_GlobalInfo
   m_TagString: Untagged
@@ -252,6 +253,18 @@ MonoBehaviour:
   deltaSpeed: 0.1
   inverseOffset: 1
   inverseRotation: 0
+--- !u!225 &2499719197949889005
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646292271688023412}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &9091868312737305558
 GameObject:
   m_ObjectHideFlags: 0

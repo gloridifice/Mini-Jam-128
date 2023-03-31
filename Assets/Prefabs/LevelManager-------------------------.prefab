@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &335796378699812031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 335796378699812019}
+  - component: {fileID: 335796378699812028}
+  - component: {fileID: 335796378699812030}
+  - component: {fileID: 335796378699812018}
+  - component: {fileID: 335796378699812016}
+  - component: {fileID: 335796378699812017}
+  - component: {fileID: 335796378699812023}
+  m_Layer: 0
+  m_Name: LevelManager-------------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &335796378699812019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335796378699812031}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &335796378699812028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335796378699812031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4128d3c18478a4da1dd39b6a3bf54e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &335796378699812030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335796378699812031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92bb030a77aaf84c9f7230ddf274c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeBox: {fileID: 0}
+  levelUIManager: {fileID: 0}
+  trappedPersonParent: {fileID: 0}
+  rescue:
+    rescuing: []
+  personalInfoDatabase: {fileID: 11400000, guid: 6ff665452f5a74d64966b66d3baab03a,
+    type: 2}
+  trappedPersonPrefab: {fileID: 5239500048498848048, guid: 7e5613cfdb3b80047bf1acb158c30ac8,
+    type: 3}
+  onBatteryChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  foundPersonCount: 0
+  savedPersonCount: 0
+  onFoundPersonCountChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onSavedPersonCountChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onPersonStatusChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  timeToEnd: 100
+--- !u!114 &335796378699812018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335796378699812031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfcaf16132aef048813638725e3be64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &335796378699812016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335796378699812031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35fb008e9f157e4eaea856e0571d871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &335796378699812017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335796378699812031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 347f1a31ffaa20a41a23255faedc6fa1,
+    type: 3}
+  m_NotificationBehavior: 3
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Default
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &335796378699812023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335796378699812031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46a6bb09dd68964496e36f424c9bb81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,7 +14,7 @@ namespace Level
         {
             tip = "";
             int count = 0;
-            foreach (var info in manager.Counter.SavedPersonSettlementInfos)
+            foreach (var info in manager.PersonCounter.SavedPersonSettlementInfos)
             {
                 if (info.timeRemain < 10)
                 {
@@ -38,7 +38,7 @@ namespace Level
         {
             tip = "";
             int count = 0;
-            foreach (var info in manager.Counter.SavedPersonSettlementInfos)
+            foreach (var info in manager.PersonCounter.SavedPersonSettlementInfos)
             {
                 if (info.personalInfo.familiesCount > 0)
                 {
@@ -68,9 +68,9 @@ namespace Level
         public bool GetSettlementTip(SettlementUIManager manager, out string tip)
         {
             tip = "";
-            int size = manager.Counter.SavedPersonSettlementInfos.Count;
+            int size = manager.PersonCounter.SavedPersonSettlementInfos.Count;
 
-            if (Random.Range(0f, 1f) > 0.5f)
+            if (size > 0 && Random.Range(0f, 1f) > 0.5f)
             {
                 int count = Random.Range(1, (int)(size / 2));
                 tip = count + " saved from losing their " + bodyPart;
@@ -87,7 +87,7 @@ namespace Level
         {
             tip = "";
             int count = 0;
-            foreach (var info in manager.Counter.SavedPersonSettlementInfos)
+            foreach (var info in manager.PersonCounter.SavedPersonSettlementInfos)
             {
                 if (info.personalInfo.age.AgePeriod == AgePeriod.Adult)
                 {
