@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0}
-  deltaSpeed: 0.7
+  deltaSpeed: 0.9
   image: {fileID: 7519924987018580325}
   crossIcon: {fileID: 1341937674024481733}
   tagSelectorPrefab: {fileID: 3381856939987768800, guid: 3c3079295ca3e3243ad734bc6597a393,

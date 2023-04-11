@@ -29,10 +29,10 @@ namespace UI
             }
         }
 
-        public bool shouldAppear = false;
+        [HideInInspector] public bool shouldAppear = false;
         public bool IsAppeared => gameObject.activeSelf && (AppearTwn.IsPlaying() || AppearTwn.IsComplete());
-        public bool isActive = false;
-        public bool waitForDie = false;
+        [HideInInspector] public bool isActive = false;
+        [HideInInspector] public bool waitForDie = false;
 
         public virtual void UpdateAppearCondition(bool b)
         {

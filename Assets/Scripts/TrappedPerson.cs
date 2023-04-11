@@ -46,7 +46,7 @@ public enum Severity
 {
     Low,
     Mid,
-    High 
+    High
 }
 
 /// <summary>
@@ -62,8 +62,10 @@ public class TrappedPerson : MonoBehaviour
             case Severity.Mid: return LevelManager.Instance.midLifeTime;
             case Severity.Low: return LevelManager.Instance.lowLifeTime;
         }
+
         return 0;
     }
+
     public float Time => GetLifeTime(severity) - timeOffset;
     public float timeOffset;
     public float TimeRemain => Time - Timer.Tick;
@@ -123,28 +125,49 @@ public class TrappedPerson : MonoBehaviour
 
     #region Scanning
 
+    [HideInInspector] public bool isGettingInfo;
+
     public class ScanningInfo
     {
         public bool isUnlock;
-        public float unlockRate;
-        public float UnlockTime => unlockRate * LevelManager.Instance.scanningTime;
+
+        public float UnlockRate
+        {
+            get
+            {
+                switch (type)
+                {
+                    case ScanningInfoType.Sound: return LevelManager.Instance.soundScanningTime;
+                    case ScanningInfoType.Health: return LevelManager.Instance.healthScanningTime;
+                    case ScanningInfoType.Life: return LevelManager.Instance.lifeScanningTime;
+                }
+
+                return 0f;
+            }
+        }
+        private ScanningInfoType type;
+        public float UnlockTime => UnlockRate * LevelManager.Instance.scanningTime;
         public float Rate => UnlockTime / LevelManager.Instance.scanningTime;
 
-        public ScanningInfo(float unlockTime)
+        public ScanningInfo(ScanningInfoType type)
         {
-            this.unlockRate = unlockTime;
+            this.type = type;
         }
     }
 
-    [HideInInspector] public bool isGettingInfo;
+    public enum ScanningInfoType
+    {
+        Sound,Health,Life
+    }
+
+    public ScanningInfo soundScanningInfo = new(ScanningInfoType.Sound);
+    public ScanningInfo healthScanningInfo = new(ScanningInfoType.Health);
+    public ScanningInfo lifeScanningInfo = new(ScanningInfoType.Life);
     public bool ShouldShowScanning => scanningCurrentTime > 0;
     private float scanningStartTime;
     private float scanningAccumulatedTime;
     private float scanningCurrentTime;
     private float FullScanTime => LevelManager.Instance.scanningTime;
-    public ScanningInfo soundScanningInfo = new(0.2f);
-    public ScanningInfo healthScanningInfo = new(0.6f);
-    public ScanningInfo lifeScanningInfo = new(1.0f);
     private event EventHandler ShowVoice;
     private event EventHandler ShowHeartbeat;
     private event EventHandler ShowFullInfo;
@@ -255,7 +278,6 @@ public class TrappedPerson : MonoBehaviour
         }
     }
 
-
     #endregion
 
 
@@ -304,7 +326,7 @@ public class TrappedPerson : MonoBehaviour
             }
         }
     }
-    
+
     private MeasureStage GetHeartbeat(int leftTime, Severity s)
     {
         var exactBPM = GetBPM(leftTime, severity);
@@ -336,36 +358,36 @@ public class TrappedPerson : MonoBehaviour
         var remain = t / LevelManager.Instance.lowLifeTime;
         return remain switch
         {
-            (>= 0) and (< 60/390f) => (uint)Random.Range(30, 40),
-            (>= 60/390f) and (< 150/390f) => (uint)Random.Range(120, 130),
-            (>= 150/390f) and (< 270/390f) => (uint)Random.Range(80, 110),
-            (>= 270/390f) and (< 1f) => (uint)Random.Range(60, 65),
+            (>= 0) and (< 60 / 390f) => (uint)Random.Range(30, 40),
+            (>= 60 / 390f) and (< 150 / 390f) => (uint)Random.Range(120, 130),
+            (>= 150 / 390f) and (< 270 / 390f) => (uint)Random.Range(80, 110),
+            (>= 270 / 390f) and (< 1f) => (uint)Random.Range(60, 65),
             _ => 0,
         };
     }
-    
+
     private uint MidSeverityBPM(int t)
     {
         var remain = t / LevelManager.Instance.midLifeTime;
         return remain switch
         {
-            (>= 0f) and (< 40/300f) => (uint)Random.Range(30, 40),
-            (>= 40/300f) and (< 120/300f) => (uint)Random.Range(120, 140),
-            (>= 120/300f) and (< 220/300f) => (uint)Random.Range(100, 120),
-            (>= 220/300f) and (< 1f) => (uint)Random.Range(60, 80),
+            (>= 0f) and (< 40 / 300f) => (uint)Random.Range(30, 40),
+            (>= 40 / 300f) and (< 120 / 300f) => (uint)Random.Range(120, 140),
+            (>= 120 / 300f) and (< 220 / 300f) => (uint)Random.Range(100, 120),
+            (>= 220 / 300f) and (< 1f) => (uint)Random.Range(60, 80),
             _ => 0,
         };
     }
-    
+
     private uint HighSeverityBPM(int t)
     {
         var remain = t / LevelManager.Instance.highLifeTime;
         return remain switch
         {
-            (>= 0f) and (< 60/240f) => (uint)Random.Range(130, 150),
-            (>= 60/240f) and (< 90/240f) => (uint)Random.Range(60, 120),
-            (>= 90/240f) and (< 180/240f) => (uint)Random.Range(120, 130),
-            (>= 180/240f) and (< 1f) => (uint)Random.Range(80, 100),
+            (>= 0f) and (< 60 / 240f) => (uint)Random.Range(130, 150),
+            (>= 60 / 240f) and (< 90 / 240f) => (uint)Random.Range(60, 120),
+            (>= 90 / 240f) and (< 180 / 240f) => (uint)Random.Range(120, 130),
+            (>= 180 / 240f) and (< 1f) => (uint)Random.Range(80, 100),
             _ => 0,
         };
     }
@@ -375,6 +397,7 @@ public class TrappedPerson : MonoBehaviour
         TrappedPersonSettlementInfo info = new TrappedPersonSettlementInfo(TimeRemain, personalInfo);
         return info;
     }
+
     private int GetInjurySeverity()
     {
         int injurySeverity = 0;

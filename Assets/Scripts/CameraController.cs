@@ -88,7 +88,7 @@ public class CameraController : MonoBehaviour
 
     private void Move()
     {
-        Vector2 move = LevelManager.Input.Move;
+        Vector2 move = LevelManager.LevelInput.Move;
         if (move != Vector2.zero)
         {
             move *= moveVelocity * (Time.deltaTime * 50f);

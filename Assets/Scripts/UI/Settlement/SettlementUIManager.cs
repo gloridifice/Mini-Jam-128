@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using GameManager;
 using Level;
+using TMPro;
 using UI.Module;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace UI.Settlement
     public class SettlementUIManager : FadeTwnUIBehaviour
     {
         public LevelManager LevelManager => LevelManager.Instance;
+        public TMP_Text dayText;
         public PersonCounter PersonCounter => LevelManager.PersonCounter;
         public GameObject tipPrefab;
         public RectTransform tipsParent;
@@ -33,6 +35,7 @@ namespace UI.Settlement
         }
         public void Init()
         {
+            SetDay(LevelManager.Instance.levelInstance.index + 1);
             SetSavedCount(PersonCounter.SavedPersonsCount);
             SetFoundCount(LevelManager.foundPersonCount);
             foreach (var tip in tips)
@@ -42,6 +45,11 @@ namespace UI.Settlement
                     AddGenerateTip(content);
                 }
             }
+        }
+
+        public void SetDay(int day)
+        {
+            dayText.text = "DAY " + day;
         }
 
         public void AddGenerateTip(string tip)

@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 99
   severity: 1
   personalInfo:
     name: Seeds
@@ -847,7 +847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 58
   severity: 0
   personalInfo:
     name: 
@@ -1184,7 +1184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 77
   severity: 0
   personalInfo:
     name: 
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 68
   severity: 0
   personalInfo:
     name: 'Servant '
@@ -1848,7 +1848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 1
   severity: 1
   personalInfo:
     name: 
@@ -1931,7 +1931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 79
   severity: 0
   personalInfo:
     name: 
@@ -2346,7 +2346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 80
   severity: 2
   personalInfo:
     name: 
@@ -3010,7 +3010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 9
   severity: 2
   personalInfo:
     name: Grant
@@ -3342,7 +3342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 98
   severity: 1
   personalInfo:
     name: 
@@ -3425,7 +3425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 19
   severity: 2
   personalInfo:
     name: 
@@ -3508,7 +3508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 16
   severity: 0
   personalInfo:
     name: 
@@ -3591,7 +3591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 61
   severity: 0
   personalInfo:
     name: Lame
@@ -4242,7 +4242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 69
   severity: 1
   personalInfo:
     name: 
@@ -4325,7 +4325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 6
   severity: 2
   personalInfo:
     name: Farmer
@@ -4408,7 +4408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 42
   severity: 0
   personalInfo:
     name: 
@@ -4574,7 +4574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 84
   severity: 2
   personalInfo:
     name: Tom
@@ -5489,7 +5489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 91
   severity: 1
   personalInfo:
     name: 'Montgomery '
@@ -5833,7 +5833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 31
   severity: 2
   personalInfo:
     name: 
@@ -6414,7 +6414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 73
   severity: 1
   personalInfo:
     name: 'Gilbert '
@@ -6497,7 +6497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 46
   severity: 1
   personalInfo:
     name: 
@@ -6829,7 +6829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 28
   severity: 0
   personalInfo:
     name: 
@@ -7228,7 +7228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 41
   severity: 0
   personalInfo:
     name: 
@@ -7560,7 +7560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 87
   severity: 2
   personalInfo:
     name: 
@@ -7726,7 +7726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 57
   severity: 0
   personalInfo:
     name: 'Simone '
@@ -8226,7 +8226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a9f9c06a4f9fc449831008f488d712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOffset: 0
+  timeOffset: 27
   severity: 0
   personalInfo:
     name: 
@@ -8661,28 +8661,33 @@ PrefabInstance:
     - target: {fileID: 335796378699812030, guid: e0c2785dc2c6348c4871745eb8436248,
         type: 3}
       propertyPath: timeToEnd
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 335796378699812030, guid: e0c2785dc2c6348c4871745eb8436248,
-        type: 3}
-      propertyPath: lowLifeTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 335796378699812030, guid: e0c2785dc2c6348c4871745eb8436248,
-        type: 3}
-      propertyPath: midLifeTime
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 335796378699812030, guid: e0c2785dc2c6348c4871745eb8436248,
         type: 3}
+      propertyPath: lowLifeTime
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 335796378699812030, guid: e0c2785dc2c6348c4871745eb8436248,
+        type: 3}
+      propertyPath: midLifeTime
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 335796378699812030, guid: e0c2785dc2c6348c4871745eb8436248,
+        type: 3}
       propertyPath: highLifeTime
-      value: 5
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 335796378699812030, guid: e0c2785dc2c6348c4871745eb8436248,
         type: 3}
       propertyPath: levelUIManager
       value: 
       objectReference: {fileID: 1529186485}
+    - target: {fileID: 335796378699812030, guid: e0c2785dc2c6348c4871745eb8436248,
+        type: 3}
+      propertyPath: healthScanningTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 335796378699812030, guid: e0c2785dc2c6348c4871745eb8436248,
         type: 3}
       propertyPath: trappedPersonParent

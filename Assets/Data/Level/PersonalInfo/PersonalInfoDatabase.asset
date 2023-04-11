@@ -14,58 +14,110 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infos:
   - name: Tom
-    familiesCount: 1
+    familiesCount: 2
     age:
-      age: 24
+      age: 12
   - name: Prosperous
     familiesCount: 0
     age:
-      age: 22
+      age: 37
   - name: Alison
-    familiesCount: 3
+    familiesCount: 0
     age:
-      age: 9
+      age: 63
   - name: Farmer
-    familiesCount: 2
+    familiesCount: 0
     age:
-      age: 41
+      age: 92
   - name: Seeds
     familiesCount: 0
     age:
-      age: 48
+      age: 77
   - name: Grant
-    familiesCount: 0
+    familiesCount: 2
     age:
-      age: 64
+      age: 54
   - name: 'Servant '
     familiesCount: 0
     age:
-      age: 97
+      age: 92
   - name: 'Montgomery '
-    familiesCount: 2
+    familiesCount: 0
     age:
-      age: 75
+      age: 66
   - name: 'Gilbert '
     familiesCount: 1
     age:
-      age: 35
+      age: 52
   - name: 'Simone '
-    familiesCount: 0
+    familiesCount: 2
     age:
-      age: 57
+      age: 70
   - name: 'Darlene  '
     familiesCount: 0
     age:
-      age: 37
+      age: 64
   - name: 'Maia  '
-    familiesCount: 3
+    familiesCount: 0
     age:
-      age: 43
+      age: 69
   - name: Rowena
-    familiesCount: 3
+    familiesCount: 0
     age:
-      age: 59
+      age: 83
+  - name: Lame
+    familiesCount: 0
+    age:
+      age: 8
   - name: Lame
     familiesCount: 3
     age:
-      age: 8
+      age: 97
+  - name: Lame
+    familiesCount: 0
+    age:
+      age: 47
+  - name: Jam
+    familiesCount: 0
+    age:
+      age: 69
+  - name: Wan
+    familiesCount: 0
+    age:
+      age: 21
+  - name: Hana
+    familiesCount: 2
+    age:
+      age: 27
+  - name: Black
+    familiesCount: 0
+    age:
+      age: 46
+  - name: Tommi
+    familiesCount: 3
+    age:
+      age: 19
+  - name: Jean
+    familiesCount: 0
+    age:
+      age: 30
+  - name: Liu
+    familiesCount: 2
+    age:
+      age: 22
+  - name: Donna
+    familiesCount: 0
+    age:
+      age: 7
+  - name: Hugo
+    familiesCount: 1
+    age:
+      age: 88
+  - name: Lin
+    familiesCount: 3
+    age:
+      age: 63
+  - name: Timy
+    familiesCount: 0
+    age:
+      age: 68

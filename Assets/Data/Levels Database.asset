@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57be713682441ec93d23cc6b295e7af, type: 3}
+  m_Name: Levels Database
+  m_EditorClassIdentifier: 
+  levels:
+  - name: Day1
+    scene: {fileID: 102900000, guid: 6a00d4219b448417e8cf74f86e7e91c0, type: 3}
+  - name: Day2
+    scene: {fileID: 102900000, guid: 106b609e38b2540709fdc9fa600f5e17, type: 3}
+  - name: Day3
+    scene: {fileID: 102900000, guid: 2d3124ef4e0fa4c69a828e2717b63262, type: 3}
