@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - name: Day1
-    scene: {fileID: 102900000, guid: 6a00d4219b448417e8cf74f86e7e91c0, type: 3}
+    scene: Level_0
+    index: 0
   - name: Day2
-    scene: {fileID: 102900000, guid: 106b609e38b2540709fdc9fa600f5e17, type: 3}
+    scene: Level_1
+    index: 0
   - name: Day3
-    scene: {fileID: 102900000, guid: 2d3124ef4e0fa4c69a828e2717b63262, type: 3}
+    scene: Level_2
+    index: 0

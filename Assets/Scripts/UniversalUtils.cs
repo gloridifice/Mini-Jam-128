@@ -68,8 +68,11 @@ public static class UniversalUtils
         }
     }
 
+#if UNITY_EDITOR
+
     public static T ObjectField<T>(string name, Object obj) where T : Object
     {
         return EditorGUILayout.ObjectField(name, obj, typeof(T), obj) as T;
     }
+#endif
 }

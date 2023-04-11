@@ -46,7 +46,7 @@ namespace MiniJam128
         {
             currentLevel = levelDatabase.levels[index];
             currentLevel.index = index;
-            SceneManager.LoadScene(currentLevel.scene.name);
+            SceneManager.LoadScene(currentLevel.scene);
         }
 
         public void LoadMainMenu()

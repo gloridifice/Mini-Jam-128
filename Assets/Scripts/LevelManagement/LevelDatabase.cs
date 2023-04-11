@@ -16,7 +16,7 @@ namespace MiniJam128.LevelManagement
     public class LevelInstance
     {
         public string name;
-        public SceneAsset scene;
+        public string scene;
 
         [HideInInspector] public int index;
     }
