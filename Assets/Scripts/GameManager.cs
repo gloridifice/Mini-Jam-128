@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using GameManager;
+using Level;
 using MiniJam128.LevelManagement;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,6 +19,8 @@ namespace MiniJam128
 
         public int MaxLevelIndex => levelDatabase.levels.Count - 1;
         public bool IsLastLevel => currentLevel.index == MaxLevelIndex;
+
+        public List<LevelSettlementInfo> levelSettlementInfos;
         private void Awake()
         {
             if (Instance == null)
@@ -28,6 +32,8 @@ namespace MiniJam128
             {
                 DestroyImmediate(this);
             }
+
+            levelSettlementInfos = new List<LevelSettlementInfo>();
         }
 
         private void OnEnable()
@@ -54,6 +60,7 @@ namespace MiniJam128
             currentLevel = null;
             SceneManager.LoadScene("MainMenu");
         }
+        
         
     }
 }

@@ -1401,6 +1401,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 807
       objectReference: {fileID: 0}
+    - target: {fileID: 2490364198622423183, guid: 969f8e702f8014a81b497c8c2aff02bd,
+        type: 3}
+      propertyPath: m_text
+      value: "It's time to play \n<b>Genshin Impact</b>"
+      objectReference: {fileID: 0}
     - target: {fileID: 2865825282217821860, guid: 969f8e702f8014a81b497c8c2aff02bd,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1564,7 +1569,7 @@ PrefabInstance:
     - target: {fileID: 6649062007589231376, guid: 969f8e702f8014a81b497c8c2aff02bd,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6918942784023002407, guid: 969f8e702f8014a81b497c8c2aff02bd,
         type: 3}
@@ -1585,6 +1590,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 143
+      objectReference: {fileID: 0}
+    - target: {fileID: 8690957862007521422, guid: 969f8e702f8014a81b497c8c2aff02bd,
+        type: 3}
+      propertyPath: m_text
+      value: Bye Bye, I'm a strange chameion~
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 969f8e702f8014a81b497c8c2aff02bd, type: 3}

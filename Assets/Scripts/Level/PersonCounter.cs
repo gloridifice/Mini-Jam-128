@@ -44,5 +44,12 @@ namespace GameManager
         {
             diedPersons.Add(tar);
         }
+
+        public void IncomeDataToGameManager()
+        {
+            LevelSettlementInfo info = new LevelSettlementInfo(SavedPersonSettlementInfos,
+                LevelManager.Instance.savedPersonCount, LevelManager.Instance.foundPersonCount, LevelManager.Instance.TrappedPersons.Count);
+            MiniJam128.GameManager.Instance.levelSettlementInfos.Add(info);
+        }
     }
 }

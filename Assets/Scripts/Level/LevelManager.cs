@@ -169,6 +169,11 @@ namespace GameManager
                     EnterNextLevel();
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                MiniJam128.GameManager.Instance.LoadMainMenu();
+            }
         }
 
         void EnterNextLevel()
@@ -243,6 +248,7 @@ namespace GameManager
         private void OnEnd()
         {
             levelUIManager.settlementUIManager.DisplayAndInit();
+            PersonCounter.IncomeDataToGameManager();
             isEnded = true;
             End -= OnEnd;
         }

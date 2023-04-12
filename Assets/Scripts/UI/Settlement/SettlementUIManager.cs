@@ -18,6 +18,12 @@ namespace UI.Settlement
         public RectTransform tipsParent;
         public CounterWithIcon savedCounter;
         public CounterWithIcon foundCounter;
+        public RectTransform keyToContinue;
+
+        [Header("Last Day")]
+        public RectTransform lastDayPanel;
+        public CounterWithIcon allFoundCounter;
+        public CounterWithIcon allSavedCounter;
         private List<ISettlementTip> tips = new()
         {
             new DyingTip(),
@@ -44,6 +50,27 @@ namespace UI.Settlement
                 {
                     AddGenerateTip(content);
                 }
+            }
+
+            
+            if (MiniJam128.GameManager.Instance.IsLastLevel)
+            {
+                keyToContinue.gameObject.SetActive(false);
+                lastDayPanel.gameObject.SetActive(true);
+                int allSCount = 0;
+                int allFCount = 0;
+                foreach (var info in MiniJam128.GameManager.Instance.levelSettlementInfos)
+                {
+                    allFCount += info.foundPersonCount;
+                    allSCount += info.savedPersonCount;
+                }
+
+                allFoundCounter.Counter = allFCount;
+                allSavedCounter.Counter = allSCount;
+            }
+            else
+            {
+                lastDayPanel.gameObject.SetActive(false);
             }
         }
 

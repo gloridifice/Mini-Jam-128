@@ -730,6 +730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 238801668}
   - component: {fileID: 238801669}
+  - component: {fileID: 238801670}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -803,6 +804,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &238801670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238801667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &276941604
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 276941605}
   - component: {fileID: 276941606}
+  - component: {fileID: 276941607}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -886,6 +900,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &276941607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276941604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &296817043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400965693}
   - component: {fileID: 400965694}
+  - component: {fileID: 400965695}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -1223,6 +1250,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &400965695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400965692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &458286118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,6 +1355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475086934}
   - component: {fileID: 475086935}
+  - component: {fileID: 475086936}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -1389,6 +1429,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &475086936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475086933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &479981869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,6 +1866,7 @@ GameObject:
   m_Component:
   - component: {fileID: 547093211}
   - component: {fileID: 547093212}
+  - component: {fileID: 547093213}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -1887,6 +1940,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &547093213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547093210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &552040333
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,6 +1962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 552040334}
   - component: {fileID: 552040335}
+  - component: {fileID: 552040336}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -1970,6 +2036,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &552040336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552040333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &566975945
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,6 +2390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 751778219}
   - component: {fileID: 751778220}
+  - component: {fileID: 751778221}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -2385,6 +2464,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &751778221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751778218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &774747078
 GameObject:
   m_ObjectHideFlags: 0
@@ -2976,6 +3067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 927746449}
   - component: {fileID: 927746450}
+  - component: {fileID: 927746451}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -3049,6 +3141,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &927746451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927746448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &942486195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3308,6 +3412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 997739823}
   - component: {fileID: 997739824}
+  - component: {fileID: 997739825}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -3323,7 +3428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997739822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 161.30295, y: 1, z: 32.598465}
+  m_LocalPosition: {x: 185, y: 1, z: 32.598465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3381,6 +3486,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &997739825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997739822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1004251739
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,6 +3508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1004251740}
   - component: {fileID: 1004251741}
+  - component: {fileID: 1004251742}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -3464,6 +3582,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1004251742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004251739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1009347151
 GameObject:
   m_ObjectHideFlags: 0
@@ -3474,6 +3604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1009347152}
   - component: {fileID: 1009347153}
+  - component: {fileID: 1009347154}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -3547,6 +3678,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1009347154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009347151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1012690343
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,6 +3700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1012690344}
   - component: {fileID: 1012690345}
+  - component: {fileID: 1012690346}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -3630,6 +3774,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1012690346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012690343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1031203197
 GameObject:
   m_ObjectHideFlags: 0
@@ -4208,6 +4364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1119064372}
   - component: {fileID: 1119064373}
+  - component: {fileID: 1119064374}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -4281,6 +4438,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1119064374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119064371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1126553958
 GameObject:
   m_ObjectHideFlags: 0
@@ -4291,6 +4460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1126553959}
   - component: {fileID: 1126553960}
+  - component: {fileID: 1126553961}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -4364,6 +4534,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1126553961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126553958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1128212269
 GameObject:
   m_ObjectHideFlags: 0
@@ -4374,6 +4556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1128212270}
   - component: {fileID: 1128212271}
+  - component: {fileID: 1128212272}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -4447,6 +4630,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1128212272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1153106050
 GameObject:
   m_ObjectHideFlags: 0
@@ -4540,6 +4735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1164592471}
   - component: {fileID: 1164592472}
+  - component: {fileID: 1164592473}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -4613,6 +4809,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1164592473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164592470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1179522921
 GameObject:
   m_ObjectHideFlags: 0
@@ -5455,6 +5663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1348465151}
   - component: {fileID: 1348465152}
+  - component: {fileID: 1348465153}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -5528,6 +5737,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1348465153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348465150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1419095446
 GameObject:
   m_ObjectHideFlags: 0
@@ -5799,6 +6020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1539525520}
   - component: {fileID: 1539525521}
+  - component: {fileID: 1539525522}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -5814,7 +6036,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1539525519}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.233765, y: 1, z: -143.28122}
+  m_LocalPosition: {x: 33.233765, y: 1, z: -159.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5872,6 +6094,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1539525522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539525519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1597152760
 GameObject:
   m_ObjectHideFlags: 0
@@ -6380,6 +6614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1758737713}
   - component: {fileID: 1758737714}
+  - component: {fileID: 1758737715}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -6453,6 +6688,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1758737715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758737712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1770721775
 GameObject:
   m_ObjectHideFlags: 0
@@ -6463,6 +6710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1770721776}
   - component: {fileID: 1770721777}
+  - component: {fileID: 1770721778}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -6536,6 +6784,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1770721778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770721775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1777301081
 GameObject:
   m_ObjectHideFlags: 0
@@ -6795,6 +7055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1826227459}
   - component: {fileID: 1826227460}
+  - component: {fileID: 1826227461}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -6868,6 +7129,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1826227461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826227458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1874081658
 GameObject:
   m_ObjectHideFlags: 0
@@ -7194,6 +7467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1913275085}
   - component: {fileID: 1913275086}
+  - component: {fileID: 1913275087}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -7267,6 +7541,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1913275087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913275084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1951856339
 GameObject:
   m_ObjectHideFlags: 0
@@ -7526,6 +7812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1964878954}
   - component: {fileID: 1964878955}
+  - component: {fileID: 1964878956}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -7599,6 +7886,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &1964878956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964878953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1971735846
 GameObject:
   m_ObjectHideFlags: 0
@@ -7692,6 +7991,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2001547026}
   - component: {fileID: 2001547027}
+  - component: {fileID: 2001547028}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -7765,6 +8065,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &2001547028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001547025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2008977110
 GameObject:
   m_ObjectHideFlags: 0
@@ -8192,6 +8504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2097335996}
   - component: {fileID: 2097335997}
+  - component: {fileID: 2097335998}
   m_Layer: 0
   m_Name: p_TrappedPerson(Clone)
   m_TagString: Untagged
@@ -8265,6 +8578,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isFound: 0
+--- !u!114 &2097335998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097335995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffb6a8c40454fb4802e152b1116cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2112228930
 GameObject:
   m_ObjectHideFlags: 0
