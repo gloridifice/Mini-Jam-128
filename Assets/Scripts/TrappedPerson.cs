@@ -7,7 +7,6 @@ using TMPro;
 using TriageTags;
 using UI.Viewport;
 using Unity.VisualScripting.FullSerializer;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -259,8 +258,11 @@ public class TrappedPerson : MonoBehaviour
 
     public void StartRescue()
     {
-        isGettingRescue = true;
-        rescueTimeStart = Timer.Tick;
+        if (!isGettingRescue)
+        {
+         isGettingRescue = true;
+         rescueTimeStart = Timer.Tick;
+        }
     }
 
     public void BreakRescue()
